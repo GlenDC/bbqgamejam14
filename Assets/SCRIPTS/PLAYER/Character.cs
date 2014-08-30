@@ -96,12 +96,9 @@ public class Character : MonoBehaviour
     // Does this script currently respond to Input?
     public bool canControl = true;
  
-    // The character will spawn at spawnPoint's position when needed.  This could be changed via a script at runtime to implement, e.g. waypoints/savepoints.
-    public Transform spawnPoint;
- 
     public PlatformerControllerMovement movement;
  
- 	public PlayerController playerController; // input controller
+ 	PlayerController playerController; // input controller
  
     public PlatformerControllerJumping jump;
  
@@ -113,9 +110,6 @@ public class Character : MonoBehaviour
     private Vector3 activeGlobalPlatformPoint;
     private Vector3 lastPlatformVelocity;
  
-    // This is used to keep track of special effects in UpdateEffects ();
-    private bool areEmittersOn = false;
- 
     void Awake()
     {
         movement = new PlatformerControllerMovement();
@@ -123,23 +117,16 @@ public class Character : MonoBehaviour
         movement.direction = transform.TransformDirection(Vector3.forward);
         controller = GetComponent<CharacterController>();
         playerController = GetComponent<PlayerController>();
-        Spawn();
     }
  
-    void Spawn()
+    public void Spawn(Vector3 position)
     {
         // reset the character's speed
         movement.verticalSpeed = 0.0f;
         movement.speed = 0.0f;
  
         // reset the character's position to the spawnPoint
-        transform.position = spawnPoint.position;
- 
-    }
- 
-    void OnDeath()
-    {
-        Spawn();
+        transform.position = position;
     }
  
     void UpdateSmoothedMovementDirection()

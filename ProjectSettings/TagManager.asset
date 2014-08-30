@@ -3,6 +3,10 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - SPAWN_ONE
+  - SPAWN_TWO
+  - PLAYER_ONE
+  - PLAYER_TWO
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

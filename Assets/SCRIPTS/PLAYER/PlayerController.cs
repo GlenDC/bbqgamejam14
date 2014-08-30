@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum EPlayerID {
+	PlayerOne,
+	PlayerTwo
+};
+
 public class PlayerController : MonoBehaviour {
 
-	public enum EPlayerdID {
-		PlayerOne,
-		PlayerTwo
-	};
-
-	EPlayerdID playerID;
+	EPlayerID playerID;
 
 	public bool goingLeft { private set; get; }
 	public bool goingRight { private set; get; }
@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Init (EPlayerdID.PlayerOne);
 		goingLeft = false;
 		goingRight = false;
 		jumping = false;
@@ -30,14 +29,14 @@ public class PlayerController : MonoBehaviour {
 		cancel = false;
 	}
 
-	public void Init(EPlayerdID player)
+	public void Init(EPlayerID player)
 	{
 		playerID = player;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (playerID == EPlayerdID.PlayerTwo){
+		if (playerID == EPlayerID.PlayerOne){
 			UpdatePlayerOne();
 		} else {
 			UpdatePlayerTwo();
