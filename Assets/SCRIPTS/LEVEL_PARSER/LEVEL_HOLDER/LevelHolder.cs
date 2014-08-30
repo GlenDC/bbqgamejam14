@@ -6,6 +6,9 @@ public class LevelHolder : MonoBehaviour {
 	GameObject[]
 		GroundTileArray = new GameObject[300];
 
+	GameObject[]
+		StartTileArray = new GameObject[2];
+
 	GameObject
 		BlueTileStart,
 		RedTileStart;
@@ -18,13 +21,11 @@ public class LevelHolder : MonoBehaviour {
 	
 	}
 
-	public void SetUpLevelHolder(GameObject[] ground_tile_array, GameObject blue_tile_start, GameObject red_tile_start, GameObject[] warp_tile_array){
+	public void SetUpLevelHolder(GameObject[] ground_tile_array, GameObject[] start_tile_array, GameObject[] warp_tile_array){
 
 		GroundTileArray = ground_tile_array;
 
-		BlueTileStart = blue_tile_start;
-
-		RedTileStart = red_tile_start;
+		StartTileArray = start_tile_array;
 
 		WarpTileArray = warp_tile_array;
 	}
