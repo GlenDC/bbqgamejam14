@@ -3,15 +3,14 @@
 --- !u!13 &1
 InputManager:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
   m_Axes:
   - serializedVersion: 3
     m_Name: p1Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: a
-    positiveButton: z
-    altNegativeButton: 
+    positiveButton: d
+    altNegativeButton: q
     altPositiveButton: 
     gravity: 3
     dead: .00100000005
@@ -74,7 +73,23 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: a
+    positiveButton: w
+    altNegativeButton: 
+    altPositiveButton: z
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: p1Jump
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: joystick button 0
     gravity: 1000
@@ -91,6 +106,22 @@ InputManager:
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: l
+    altNegativeButton: 
+    altPositiveButton: up
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: p2Jump
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: joystick button 0
     gravity: 1000
