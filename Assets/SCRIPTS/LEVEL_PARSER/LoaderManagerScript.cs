@@ -6,13 +6,22 @@ using System.IO;
 public class LoaderManagerScript : MonoBehaviour {
 
 	[ SerializeField ] GameObject
-		TileObjectPrefab;
+		LevelHolderPrefab,
+		GroundTilePrefab,
+		StartTilePrefab,
+		WarpTilePrefab;
 
 	[ SerializeField ] Material[]
 		TileMaterialArray = new Material[7];
 
+	[ SerializeField ] Sprite[]
+		GroundSpriteArray = new Sprite[9];
+
 	GameObject[]
-		TileObjectArray = new GameObject[100];
+		StartTileArray = new GameObject[2];
+
+	GameObject[]
+		GroundTileArray = new GameObject[300];
 
 	GameObject
 		StartDoorObject,
@@ -32,7 +41,7 @@ public class LoaderManagerScript : MonoBehaviour {
 
 		for (int i=0; i < 100; i++){
 			
-			TileObjectArray[i] = null;
+			GroundTileArray[i] = null;
 		}
 		
 		StartDoorObject = null;
@@ -40,9 +49,9 @@ public class LoaderManagerScript : MonoBehaviour {
 		ExitDoorObject = null;
 	}
 
-	public GameObject[] GetTileObjectArray(){
-		GameObject[] tile_object_array = TileObjectArray;
-		return tile_object_array;
+	public GameObject[] GetGroundTileArray(){
+		GameObject[] ground_tile_array = GroundTileArray;
+		return ground_tile_array;
 	}
 
 	public GameObject GetStartDoorObject(){
@@ -55,7 +64,17 @@ public class LoaderManagerScript : MonoBehaviour {
 		return exit_door_object;
 	}
 
-	public void LoadLevel(TextAsset level_text_asset){
+	public GameObject LoadLevel(TextAsset level_text_asset){
+
+		GameObject level_holder = Instantiate(LevelHolderPrefab,Vector3.zero,Quaternion.identity) as GameObject;
+		level_holder.name = "level_holder";
+
+		GameObject[] ground_tile_array = new GameObject[300];
+
+		GameObject blue_start_object = new GameObject();
+		GameObject red_start_object = new GameObject();
+
+		GameObject[] warp_tile_array = new GameObject[20];
 
 		XmlDocument level_xml = new XmlDocument();
 
@@ -75,114 +94,114 @@ public class LoaderManagerScript : MonoBehaviour {
 			level_tile_width = int.Parse(map_node.Attributes["tilewidth"].Value);
 			level_tile_height = int.Parse(map_node.Attributes["tileheight"].Value);
 		}
+
+		int node_counter = 0;
+
+		int ground_tile_counter = 0;
+
+		int warp_tile_counter = 0;
+
+		int tile_counter = 0;
+		int line_counter = 0;
 		
-		int tile_object_counter = 0;
+		XmlNodeList tile_list = level_xml.GetElementsByTagName("tile");
 
-		for (int i=0; i < 2; i++){
+		foreach (XmlNode tile_node in tile_list){
 
-			TileObjectArray[tile_object_counter] = Instantiate(TileObjectPrefab,this.transform.position,Quaternion.identity) as GameObject;
-			TileObjectArray[tile_object_counter].name = "tile_object_" + tile_object_counter;
+			int tile_value = int.Parse(tile_node.Attributes["gid"].Value);
 
-			int border_width = level_width;
-			int border_height = level_height;
+			if (tile_value != 0){
 
-			int border_position_x = - level_width + 2 * level_width * i;
-			int border_position_y = 0;
+				tile_value -= 1;
 
-			TileObjectArray[tile_object_counter].GetComponent<TileObjectScript>().SetUpTileObject("level_border_" + i,"level_border",TileMaterialArray[4],border_position_x,border_position_y,border_width,border_height,this.GetComponent<MetricScript>().GetTileSize());
+				if (tile_value >= 0 && tile_value < 9){
 
-			tile_object_counter++;
-		}
+					Vector3 ground_tile_position = this.transform.position;
 
-		for (int j=0; j < 2; j++){
-			
-			TileObjectArray[tile_object_counter] = Instantiate(TileObjectPrefab,this.transform.position,Quaternion.identity) as GameObject;
-			TileObjectArray[tile_object_counter].name = "tile_object_" + tile_object_counter;
+					ground_tile_position.x = tile_counter * this.GetComponent<MetricScript>().GetTileSize();
+					ground_tile_position.y = level_height * this.GetComponent<MetricScript>().GetTileSize() - line_counter * this.GetComponent<MetricScript>().GetTileSize();
 
-			int border_width = level_width * 3;
-			int border_height = level_height;
-			
-			int border_position_x = - level_width;
-			int border_position_y = - level_height + 2 * level_height * j;
-			
-			TileObjectArray[tile_object_counter].GetComponent<TileObjectScript>().SetUpTileObject("level_border_" + j,"level_border",TileMaterialArray[4],border_position_x,border_position_y,border_width,border_height,this.GetComponent<MetricScript>().GetTileSize());
-			
-			tile_object_counter++;
+					ground_tile_array[ground_tile_counter] = Instantiate(GroundTilePrefab,ground_tile_position,Quaternion.identity) as GameObject;
+					ground_tile_array[ground_tile_counter].name = "tile_" + ground_tile_counter;
+					ground_tile_array[ground_tile_counter].transform.parent = level_holder.transform;
+
+					ground_tile_array[ground_tile_counter].GetComponent<TileObject>().SetUpTileObject(GroundSpriteArray[tile_value]);
+
+					ground_tile_counter++;
+				}
+			}
+
+			node_counter++;
+
+			tile_counter++;
+
+			if (tile_counter >= level_width){
+
+				line_counter++;
+
+				tile_counter = 0;
+			}
 		}
 
 		XmlNodeList object_list = level_xml.GetElementsByTagName("object");
 
 		foreach (XmlNode object_node in object_list){
 			
-			string tile_name = object_node.Attributes["name"].Value;
 			string tile_type = object_node.Attributes["type"].Value;
 
-			if (tile_type != "start_door_object" && tile_type != "exit_door_object"){
+			if (tile_type == "blue_start" || tile_type == "red_start"){
 
-				TileObjectArray[tile_object_counter] = Instantiate(TileObjectPrefab,this.transform.position,Quaternion.identity) as GameObject;
-				TileObjectArray[tile_object_counter].name = "tile_object_" + tile_object_counter;
+				Vector3 start_tile_position = this.transform.position;
+				start_tile_position.x = (float) int.Parse(object_node.Attributes["x"].Value)/level_tile_width;
+				start_tile_position.y = (float) int.Parse(object_node.Attributes["y"].Value)/level_tile_height;
 
-				Material tile_material = TileMaterialArray[0];
+				if (tile_type == "blue_start"){
 
-				if (tile_type == "red_object"){
-					tile_material = TileMaterialArray[0];
+					blue_start_object = Instantiate(StartTilePrefab,start_tile_position,Quaternion.identity) as GameObject;
+					blue_start_object.name = "blue_start_tile";
+					blue_start_object.transform.parent = level_holder.transform;
+
+					blue_start_object.GetComponent<StartTileObject>().SetUpStartTile(0);
 				}
-				else if (tile_type == "blue_object"){
-					tile_material = TileMaterialArray[1];
-				}
-				else if (tile_type == "yellow_object"){
-					tile_material = TileMaterialArray[2];
-				}
-				else if (tile_type == "green_object"){
-					tile_material = TileMaterialArray[3];
-				}
+				else if (tile_type == "red_start"){
 
-				int tile_position_x = int.Parse(object_node.Attributes["x"].Value)/level_tile_width;
-				int tile_position_y = int.Parse(object_node.Attributes["y"].Value)/level_tile_height;
-				int tile_width = int.Parse(object_node.Attributes["width"].Value)/level_tile_width;
-				int tile_height = int.Parse(object_node.Attributes["height"].Value)/level_tile_height;
+					red_start_object = Instantiate(StartTilePrefab,start_tile_position,Quaternion.identity) as GameObject;
+					red_start_object.name = "blue_start_tile";
+					red_start_object.transform.parent = level_holder.transform;
 
-				TileObjectArray[tile_object_counter].GetComponent<TileObjectScript>().SetUpTileObject(tile_name,tile_type,tile_material,tile_position_x,tile_position_y,tile_width,tile_height,this.GetComponent<MetricScript>().GetTileSize());
-
-				tile_object_counter++;
+					red_start_object.GetComponent<StartTileObject>().SetUpStartTile(1);
+				}
 			}
-			else if (tile_type == "start_door_object"){
+			else if (tile_type == "sausage_warp" || tile_type == "ninja_warp"){
 
-				StartDoorObject = Instantiate(TileObjectPrefab,this.transform.position,Quaternion.identity) as GameObject;
-				StartDoorObject.name = "start_door_object";
+				Vector3 warp_tile_position = this.transform.position;
+				warp_tile_position.x = (float) int.Parse(object_node.Attributes["x"].Value)/level_tile_width;
+				warp_tile_position.y = (float) int.Parse(object_node.Attributes["y"].Value)/level_tile_height;
 
-				int start_door_position_x = int.Parse(object_node.Attributes["x"].Value)/level_tile_width;
-				int start_door_position_y = int.Parse(object_node.Attributes["y"].Value)/level_tile_height;
-				int start_door_width = int.Parse(object_node.Attributes["width"].Value)/level_tile_width;
-				int start_door_height = int.Parse(object_node.Attributes["height"].Value)/level_tile_height;
+				warp_tile_array[warp_tile_counter] = Instantiate(WarpTilePrefab,warp_tile_position,Quaternion.identity) as GameObject;
+				warp_tile_array[warp_tile_counter].name = "warp_tile_" + warp_tile_counter;
+				warp_tile_array[warp_tile_counter].transform.parent = level_holder.transform;
 
-				StartDoorObject.GetComponent<TileObjectScript>().SetUpTileObject(tile_name,tile_type,TileMaterialArray[5],start_door_position_x,start_door_position_y,start_door_width,start_door_height,this.GetComponent<MetricScript>().GetTileSize());
-				
-				Vector3 start_door_object_position = StartDoorObject.transform.position;
+				int warp_type = -1;
 
-				start_door_object_position.z += this.GetComponent<MetricScript>().GetTileSize();
+				if (tile_type == "sausage_warp"){
 
-				StartDoorObject.transform.position = start_door_object_position;
-			}
-			else if (tile_type == "exit_door_object"){
-				
-				ExitDoorObject = Instantiate(TileObjectPrefab,this.transform.position,Quaternion.identity) as GameObject;
-				ExitDoorObject.name = "start_door_object";
+					warp_type = 0;
+				}
+				else if (tile_type == "ninja_warp"){
 
-				int exit_door_position_x = int.Parse(object_node.Attributes["x"].Value)/level_tile_width;
-				int exit_door_position_y = int.Parse(object_node.Attributes["y"].Value)/level_tile_height;
-				int exit_door_width = int.Parse(object_node.Attributes["width"].Value)/level_tile_width;
-				int exit_door_height = int.Parse(object_node.Attributes["height"].Value)/level_tile_height;
-				
-				ExitDoorObject.GetComponent<TileObjectScript>().SetUpTileObject(tile_name,tile_type,TileMaterialArray[6],exit_door_position_x,exit_door_position_y,exit_door_width,exit_door_height,this.GetComponent<MetricScript>().GetTileSize());
-				
-				Vector3 exit_door_object_position = ExitDoorObject.transform.position;
-				
-				exit_door_object_position.z += this.GetComponent<MetricScript>().GetTileSize();
-				
-				ExitDoorObject.transform.position = exit_door_object_position;
+					warp_type= 1;
+				}
+
+				warp_tile_array[warp_tile_counter].GetComponent<WarpTileObject>().SetUpWarpType(warp_type);
+
+				warp_tile_counter++;
 			}
 		}
+
+		level_holder.GetComponent<LevelHolder>().SetUpLevelHolder(ground_tile_array,blue_start_object,red_start_object,warp_tile_array);
+
+		return level_holder;
 	}
 
 	// Update is called once per frame
