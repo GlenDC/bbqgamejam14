@@ -71,8 +71,10 @@ public class LoaderManagerScript : MonoBehaviour {
 
 		GameObject[] ground_tile_array = new GameObject[300];
 
-		GameObject blue_start_object = new GameObject();
-		GameObject red_start_object = new GameObject();
+		GameObject[] start_tile_array = new GameObject[2];
+
+		//GameObject blue_start_object = new GameObject();
+		//GameObject red_start_object = new GameObject();
 
 		GameObject[] warp_tile_array = new GameObject[20];
 
@@ -98,6 +100,8 @@ public class LoaderManagerScript : MonoBehaviour {
 		int node_counter = 0;
 
 		int ground_tile_counter = 0;
+
+		int start_tile_counter = 0;
 
 		int warp_tile_counter = 0;
 
@@ -157,21 +161,23 @@ public class LoaderManagerScript : MonoBehaviour {
 
 				if (tile_type == "blue_start"){
 
-					blue_start_object = Instantiate(StartTilePrefab,start_tile_position,Quaternion.identity) as GameObject;
-					blue_start_object.name = "blue_start_tile";
-					blue_start_object.tag = "SPAWN_ONE";
-					blue_start_object.transform.parent = level_holder.transform;
+					start_tile_array[start_tile_counter] = Instantiate(StartTilePrefab,start_tile_position,Quaternion.identity) as GameObject;
+					start_tile_array[start_tile_counter].name = "blue_start_tile";
+					start_tile_array[start_tile_counter].transform.parent = level_holder.transform;
 
-					blue_start_object.GetComponent<StartTileObject>().SetUpStartTile(0);
+					start_tile_array[start_tile_counter].GetComponent<StartTileObject>().SetUpStartTile(0);
+
+					start_tile_counter++;
 				}
 				else if (tile_type == "red_start"){
 
-					red_start_object = Instantiate(StartTilePrefab,start_tile_position,Quaternion.identity) as GameObject;
-					red_start_object.name = "red_start_tile";
-					red_start_object.tag = "SPAWN_TWO";
-					red_start_object.transform.parent = level_holder.transform;
+					start_tile_array[start_tile_counter] = Instantiate(StartTilePrefab,start_tile_position,Quaternion.identity) as GameObject;
+					start_tile_array[start_tile_counter].name = "blue_start_tile";
+					start_tile_array[start_tile_counter].transform.parent = level_holder.transform;
 
-					red_start_object.GetComponent<StartTileObject>().SetUpStartTile(1);
+					start_tile_array[start_tile_counter].GetComponent<StartTileObject>().SetUpStartTile(1);
+
+					start_tile_counter++;
 				}
 			}
 			else if (tile_type == "sausage_warp" || tile_type == "ninja_warp"){
@@ -201,7 +207,7 @@ public class LoaderManagerScript : MonoBehaviour {
 			}
 		}
 
-		level_holder.GetComponent<LevelHolder>().SetUpLevelHolder(ground_tile_array,blue_start_object,red_start_object,warp_tile_array);
+		level_holder.GetComponent<LevelHolder>().SetUpLevelHolder(ground_tile_array,start_tile_array,warp_tile_array);
 
 		return level_holder;
 	}
