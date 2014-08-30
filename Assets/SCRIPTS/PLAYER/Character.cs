@@ -211,7 +211,7 @@ public class Character : MonoBehaviour
     void ApplyGravity()
     {
         // Apply gravity
-        bool jumpButton = Input.GetButton("Jump");
+        bool jumpButton = playerController.jumping;
 
         if (!canControl)
             jumpButton = false;
