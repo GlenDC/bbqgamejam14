@@ -133,8 +133,8 @@ Camera:
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 15.5699997
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -153,8 +153,85 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1689136181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 17.3555946, y: -13.1763306, z: -52.5040665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
+  m_Father: {fileID: 1766959244}
+  m_RootOrder: 0
+--- !u!1 &1766959242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1766959244}
+  - 114: {fileID: 1766959243}
+  - 114: {fileID: 1766959245}
+  - 114: {fileID: 1766959246}
+  m_Layer: 0
+  m_Name: _GAME
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1766959243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1766959242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f01153eeeca9549bbc82e9dd5c0b27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelList:
+  - {fileID: 4900000, guid: cf887e759a49dbc46816123a8820f5b3, type: 3}
+--- !u!4 &1766959244
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1766959242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1689136186}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1766959245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1766959242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a342c9d650412342af30d759f7b0900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TileObjectPrefab: {fileID: 100000, guid: 7a6f6a19a23250b419276f2bc9c497e6, type: 2}
+  TileMaterialArray:
+  - {fileID: 2100000, guid: 4abf6947a09b7e448bbefe19af47cbcf, type: 2}
+  - {fileID: 2100000, guid: a871b839226d78c429a7af531d20ff50, type: 2}
+  - {fileID: 2100000, guid: 04374f80f5d0f284592f4babc642ef87, type: 2}
+  - {fileID: 2100000, guid: acf987d8bff147242846cec1c05f1d42, type: 2}
+  - {fileID: 2100000, guid: de45a86ddc40bfb4382cc9844971bc7e, type: 2}
+  - {fileID: 2100000, guid: 29f29ddc8d61d234797e5f9c0f0b8bf0, type: 2}
+  - {fileID: 2100000, guid: c71115c038fc2954e92b5690fd0b104a, type: 2}
+--- !u!114 &1766959246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1766959242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5722db42e6448f243b347827f80fc76c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterSize: .5
+  TileSize: 1.20000005
