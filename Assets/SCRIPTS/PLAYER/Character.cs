@@ -105,10 +105,10 @@ public class Character : MonoBehaviour
     private CharacterController controller;
  
     // Moving platform support.
-    private Transform activePlatform;
-    private Vector3 activeLocalPlatformPoint;
-    private Vector3 activeGlobalPlatformPoint;
-    private Vector3 lastPlatformVelocity;
+    protected Transform activePlatform;
+    protected Vector3 activeLocalPlatformPoint;
+    protected Vector3 activeGlobalPlatformPoint;
+    protected Vector3 lastPlatformVelocity;
  
     void Awake()
     {
@@ -129,7 +129,7 @@ public class Character : MonoBehaviour
         transform.position = position;
     }
  
-    void UpdateSmoothedMovementDirection()
+    protected void UpdateSmoothedMovementDirection()
     {
         float h = 0.0f;
         if(playerController.goingLeft) 	h -= 1.0f;
@@ -143,29 +143,16 @@ public class Character : MonoBehaviour
         if (movement.isMoving)
             movement.direction = new Vector3(h, 0, 0);
  
-        // Grounded controls
-        //if (controller.isGrounded)
-        //{
-            // Smooth the speed based on the current target direction
-            float curSmooth = movement.speedSmoothing * Time.deltaTime;
- 
-            // Choose target speed
- 
-            float targetSpeed = Mathf.Min(Mathf.Abs(h), 1.0f);
- 
-            targetSpeed *= movement.runSpeed;
- 
-            movement.speed = Mathf.Lerp(movement.speed, targetSpeed, curSmooth);
- 
-            movement.hangTime = 0.0f;
-        //}
-        //else
-        //{
-        //    // In air controls
-        //    movement.hangTime += Time.deltaTime;
-        //    if (movement.isMoving)
-        //        movement.inAirVelocity += new Vector3(Mathf.Sign(h), 0, 0) * Time.deltaTime * movement.inAirControlAcceleration;
-        //}
+        // Smooth the speed based on the current target direction
+        float curSmooth = movement.speedSmoothing * Time.deltaTime;
+
+        // Choose target speed
+
+        float targetSpeed = Mathf.Min(Mathf.Abs(h), 1.0f);
+
+        targetSpeed *= movement.runSpeed;
+
+        movement.speed = Mathf.Lerp(movement.speed, targetSpeed, curSmooth);
     }
  
     void FixedUpdate()
