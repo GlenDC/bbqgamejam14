@@ -152,8 +152,8 @@ public class LoaderManagerScript : MonoBehaviour {
 			if (tile_type == "blue_start" || tile_type == "red_start"){
 
 				Vector3 start_tile_position = this.transform.position;
-				start_tile_position.x = (float) int.Parse(object_node.Attributes["x"].Value)/level_tile_width;
-				start_tile_position.y = (float) int.Parse(object_node.Attributes["y"].Value)/level_tile_height;
+				start_tile_position.x = (float) (int.Parse(object_node.Attributes["x"].Value)/level_tile_width) * this.GetComponent<MetricScript>().GetTileSize();
+				start_tile_position.y = (float) (int.Parse(object_node.Attributes["y"].Value)/level_tile_height) * this.GetComponent<MetricScript>().GetTileSize();
 
 				if (tile_type == "blue_start"){
 
@@ -177,8 +177,8 @@ public class LoaderManagerScript : MonoBehaviour {
 			else if (tile_type == "sausage_warp" || tile_type == "ninja_warp"){
 
 				Vector3 warp_tile_position = this.transform.position;
-				warp_tile_position.x = (float) int.Parse(object_node.Attributes["x"].Value)/level_tile_width;
-				warp_tile_position.y = (float) int.Parse(object_node.Attributes["y"].Value)/level_tile_height;
+				warp_tile_position.x = (float) (int.Parse(object_node.Attributes["x"].Value)/level_tile_width) * this.GetComponent<MetricScript>().GetTileSize();
+				warp_tile_position.y = (float) (int.Parse(object_node.Attributes["y"].Value)/level_tile_height) * this.GetComponent<MetricScript>().GetTileSize();
 
 				warp_tile_array[warp_tile_counter] = Instantiate(WarpTilePrefab,warp_tile_position,Quaternion.identity) as GameObject;
 				warp_tile_array[warp_tile_counter].name = "warp_tile_" + warp_tile_counter;
