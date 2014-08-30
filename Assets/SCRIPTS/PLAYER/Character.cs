@@ -19,9 +19,6 @@ public class Character : MonoBehaviour
         // How fast does the character change speeds?  Higher is faster.
         public float speedSmoothing = 20.0f;
  
-        // This controls how fast the graphics of the character "turn around" when the player turns around using the controls.
-        public float rotationSmoothing = 10.0f;
- 
         // The current move direction in x-y.  This will always been (1,0,0) or (-1,0,0)
         // The next line, @System.NonSerialized , tells Unity to not serialize the variable or show it in the inspector view.  Very handy for organization!
         [System.NonSerialized]
@@ -69,8 +66,6 @@ public class Character : MonoBehaviour
         // We add extraHeight units (meters) on top when holding the button down longer while jumping
         public float extraHeight = 4.1f;
  
-        public float doubleJumpHeight = 2.1f;
- 
         // This prevents inordinarily too quick jumping
         // The next line, @System.NonSerialized , tells Unity to not serialize the variable or show it in the inspector view.  Very handy for organization!
         [System.NonSerialized]
@@ -82,14 +77,6 @@ public class Character : MonoBehaviour
         // Are we jumping? (Initiated with jump button and not grounded yet)
         [System.NonSerialized]
         public bool jumping = false;
- 
-        // Are where double jumping? ( Initiated when jumping or falling after pressing the jump button )
-        [System.NonSerialized]
-        public bool doubleJumping = false;
- 
-        // Can we make a double jump ( we can't make two double jump or more at the same jump )
-        [System.NonSerialized]
-        public bool canDoubleJump = false;
  
         [System.NonSerialized]
         public bool reachedApex = false;
@@ -114,7 +101,7 @@ public class Character : MonoBehaviour
  
     public PlatformerControllerMovement movement;
  
- 	public PlayerController playerController;
+ 	public PlayerController playerController; // input controller
  
     public PlatformerControllerJumping jump;
  
@@ -235,33 +222,14 @@ public class Character : MonoBehaviour
             jump.reachedApex = true;
             SendMessage("DidJumpReachApex", SendMessageOptions.DontRequireReceiver);
         }
- 
-        // if we are jumping and we press jump button, we do a double jump or
-        // if we are falling, we can do a double jump to
-        if ((jump.jumping && !playerController.jumping && !jump.doubleJumping) || (!controller.isGrounded && !jump.jumping && !jump.doubleJumping && movement.verticalSpeed < -12.0))
-        {
-            jump.canDoubleJump = true;
-        }
- 
-        // if we can do a double jump, and we press the jump button, we do a double jump
-        if (jump.canDoubleJump && playerController.jumping && !IsTouchingCeiling())
-        {
-            jump.doubleJumping = true;
-            movement.verticalSpeed = CalculateJumpVerticalSpeed(jump.doubleJumpHeight);
-            jump.canDoubleJump = false;
- 
-        }
         // * When jumping up we don't apply gravity for some time when the user is holding the jump button
         //   This gives more control over jump height by pressing the button longer
-        bool extraPowerJump = jump.jumping && !jump.doubleJumping && movement.verticalSpeed > 0.0 && jumpButton && transform.position.y < jump.lastStartHeight + jump.extraHeight && !IsTouchingCeiling();
+        bool extraPowerJump = jump.jumping && movement.verticalSpeed > 0.0 && jumpButton && transform.position.y < jump.lastStartHeight + jump.extraHeight && !IsTouchingCeiling();
  
         if (extraPowerJump)
             return;
         else if (controller.isGrounded)
-        {
             movement.verticalSpeed = -movement.gravity * Time.deltaTime;
-            jump.canDoubleJump = false;
-        }
         else
             movement.verticalSpeed -= movement.gravity * Time.deltaTime;
  
@@ -285,24 +253,9 @@ public class Character : MonoBehaviour
         jump.lastButtonTime = -10;
     }
  
-    void UpdateEffects()
-    {
-        /*bool wereEmittersOn = areEmittersOn;
-        areEmittersOn = jump.jumping && movement.verticalSpeed > 0.0;
- 
-        // By comparing the previous value of areEmittersOn to the new one, we will only update the particle emitters when needed
-        if (wereEmittersOn != areEmittersOn)
-        {
-            foreach (ParticleEmitter emitter in GetComponentsInChildren<ParticleEmitter>())
-            {
-                emitter.emit = areEmittersOn;
-            }
-        }*/
-    }
- 
     void Update()
     {
-        if (Input.GetButtonDown("Jump") && canControl)
+        if (playerController.jumping && canControl)
         {
             jump.lastButtonTime = Time.time;
         }
@@ -355,20 +308,20 @@ public class Character : MonoBehaviour
         }
  
         // Set rotation to the move direction  
-        if (movement.direction.sqrMagnitude > 0.01)
+        /*if (movement.direction.sqrMagnitude > 0.01)
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement.direction), Time.deltaTime * movement.rotationSmoothing);
-        else transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement.direction), Time.deltaTime * 100);
+        else transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement.direction), Time.deltaTime * 100);*/
+
+        // TODO: flip character based on direction
  
         // We are in jump mode but just became grounded
         if (controller.isGrounded)
         {
             movement.inAirVelocity = Vector3.zero;
  
-            if (jump.jumping || jump.doubleJumping)
+            if (jump.jumping)
             {
                 jump.jumping = false;
-                jump.doubleJumping = false;
-                jump.canDoubleJump = false;
  
                 SendMessage("DidLand", SendMessageOptions.DontRequireReceiver);
  
@@ -377,9 +330,6 @@ public class Character : MonoBehaviour
                     movement.direction = jumpMoveDirection.normalized;
             }
         }
- 
-        // Update special effects like rocket pack particle effects
-        UpdateEffects();
     }
  
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -418,16 +368,6 @@ public class Character : MonoBehaviour
         return jump.jumping;
     }
  
-    bool IsDoubleJumping()
-    {
-        return jump.doubleJumping;
-    }
- 
-    bool canDoubleJump()
-    {
-        return jump.canDoubleJump;
-    }
- 
     bool IsTouchingCeiling()
     {
         return (movement.collisionFlags & CollisionFlags.CollidedAbove) != 0;
@@ -443,17 +383,9 @@ public class Character : MonoBehaviour
         return movement.hangTime;
     }
  
-    void Reset()
-    {
-        gameObject.tag = "Player";
-    }
- 
     void SetControllable(bool controllable)
     {
         canControl = controllable;
     }
- 
-   
- 
 }
  
