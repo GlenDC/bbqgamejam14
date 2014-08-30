@@ -44,7 +44,7 @@ public class TileObjectScript : MonoBehaviour {
 		tile_object_scale.y = TileSize.y * tile_metric_size;
 		TileObject.transform.localScale = tile_object_scale;
 
-		this.GetComponent<BoxCollider>().size = TileObject.transform.localScale;
+		this.GetComponent<BoxCollider2D>().size = TileObject.transform.localScale;
 
 		Vector3 tile_object_position = this.transform.position;
 		tile_object_position.x += TilePosition.x * tile_metric_size + (TileSize.x * tile_metric_size)/2;
