@@ -45,7 +45,7 @@ GameObject:
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: CHARACTER
+  m_Name: NINJA
   m_TagString: PLAYER_ONE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

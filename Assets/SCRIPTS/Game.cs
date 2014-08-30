@@ -35,13 +35,13 @@ public class Game : MonoBehaviour
 		if(playerID == EPlayerID.PlayerOne)
 		{
 			character = playerOne;
-			charName = "Player One";
+			charName = "PLAYER_ONE";
 			spawnPosition = spawnOne.position;
 		}
 		else
 		{
 			character = playerTwo;
-			charName = "Player Two";
+			charName = "PLAYER_TWO";
 			spawnPosition = spawnTwo.position;
 		}
 
@@ -53,5 +53,6 @@ public class Game : MonoBehaviour
 		character.GetComponent<PlayerController>().Init(playerID);
 		character.GetComponent<Character>().Spawn(spawnPosition);
 		character.name = charName;
+		character.layer = LayerMask.NameToLayer(charName);
 	}
 }
