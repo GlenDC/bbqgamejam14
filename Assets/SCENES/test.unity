@@ -74,6 +74,136 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1 &291693586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 291693587}
+  m_Layer: 0
+  m_Name: SPAWN_ONE
+  m_TagString: SPAWN_ONE
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &291693587
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 291693586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.4541416, y: -14.3278542, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+--- !u!1 &829712637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 829712638}
+  m_Layer: 0
+  m_Name: SPAWN_TWO
+  m_TagString: SPAWN_TWO
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &829712638
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829712637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.4966507, y: -11.4037743, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+--- !u!1 &892242352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 892242353}
+  - 114: {fileID: 892242356}
+  - 114: {fileID: 892242355}
+  - 114: {fileID: 892242354}
+  m_Layer: 0
+  m_Name: _LEVEL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &892242353
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 892242352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1766959244}
+  m_RootOrder: 1
+--- !u!114 &892242354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 892242352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5722db42e6448f243b347827f80fc76c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterSize: .5
+  TileSize: 1.20000005
+--- !u!114 &892242355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 892242352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a342c9d650412342af30d759f7b0900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TileObjectPrefab: {fileID: 100000, guid: 7a6f6a19a23250b419276f2bc9c497e6, type: 2}
+  TileMaterialArray:
+  - {fileID: 2100000, guid: 4abf6947a09b7e448bbefe19af47cbcf, type: 2}
+  - {fileID: 2100000, guid: a871b839226d78c429a7af531d20ff50, type: 2}
+  - {fileID: 2100000, guid: 04374f80f5d0f284592f4babc642ef87, type: 2}
+  - {fileID: 2100000, guid: acf987d8bff147242846cec1c05f1d42, type: 2}
+  - {fileID: 2100000, guid: de45a86ddc40bfb4382cc9844971bc7e, type: 2}
+  - {fileID: 2100000, guid: 29f29ddc8d61d234797e5f9c0f0b8bf0, type: 2}
+  - {fileID: 2100000, guid: c71115c038fc2954e92b5690fd0b104a, type: 2}
+--- !u!114 &892242356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 892242352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f01153eeeca9549bbc82e9dd5c0b27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelList:
+  - {fileID: 4900000, guid: cf887e759a49dbc46816123a8820f5b3, type: 3}
 --- !u!1 &1689136181
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +217,7 @@ GameObject:
   - 124: {fileID: 1689136183}
   - 81: {fileID: 1689136182}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: _CAMERA
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,8 +297,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1766959244}
   - 114: {fileID: 1766959243}
-  - 114: {fileID: 1766959245}
-  - 114: {fileID: 1766959246}
   m_Layer: 0
   m_Name: _GAME
   m_TagString: Untagged
@@ -184,11 +312,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1766959242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5f01153eeeca9549bbc82e9dd5c0b27, type: 3}
+  m_Script: {fileID: 11500000, guid: 24f4812eb8fdde444911eafd7f5296fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelList:
-  - {fileID: 4900000, guid: cf887e759a49dbc46816123a8820f5b3, type: 3}
 --- !u!4 &1766959244
 Transform:
   m_ObjectHideFlags: 0
@@ -200,38 +326,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1689136186}
+  - {fileID: 892242353}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &1766959245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1766959242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a342c9d650412342af30d759f7b0900, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TileObjectPrefab: {fileID: 100000, guid: 7a6f6a19a23250b419276f2bc9c497e6, type: 2}
-  TileMaterialArray:
-  - {fileID: 2100000, guid: 4abf6947a09b7e448bbefe19af47cbcf, type: 2}
-  - {fileID: 2100000, guid: a871b839226d78c429a7af531d20ff50, type: 2}
-  - {fileID: 2100000, guid: 04374f80f5d0f284592f4babc642ef87, type: 2}
-  - {fileID: 2100000, guid: acf987d8bff147242846cec1c05f1d42, type: 2}
-  - {fileID: 2100000, guid: de45a86ddc40bfb4382cc9844971bc7e, type: 2}
-  - {fileID: 2100000, guid: 29f29ddc8d61d234797e5f9c0f0b8bf0, type: 2}
-  - {fileID: 2100000, guid: c71115c038fc2954e92b5690fd0b104a, type: 2}
---- !u!114 &1766959246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1766959242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5722db42e6448f243b347827f80fc76c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterSize: .5
-  TileSize: 1.20000005
