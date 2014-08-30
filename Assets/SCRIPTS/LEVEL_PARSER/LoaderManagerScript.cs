@@ -157,7 +157,7 @@ public class LoaderManagerScript : MonoBehaviour {
 
 				Vector3 start_tile_position = this.transform.position;
 				start_tile_position.x = (float) (int.Parse(object_node.Attributes["x"].Value)/level_tile_width) * this.GetComponent<MetricScript>().GetTileSize();
-				start_tile_position.y = (float) (int.Parse(object_node.Attributes["y"].Value)/level_tile_height) * this.GetComponent<MetricScript>().GetTileSize();
+				start_tile_position.y = (float) (int.Parse(object_node.Attributes["y"].Value)/level_tile_height) * this.GetComponent<MetricScript>().GetTileSize() + 2.0f;
 
 				if (tile_type == "blue_start"){
 
@@ -172,7 +172,7 @@ public class LoaderManagerScript : MonoBehaviour {
 				else if (tile_type == "red_start"){
 
 					start_tile_array[start_tile_counter] = Instantiate(StartTilePrefab,start_tile_position,Quaternion.identity) as GameObject;
-					start_tile_array[start_tile_counter].name = "blue_start_tile";
+					start_tile_array[start_tile_counter].name = "red_start_tile";
 					start_tile_array[start_tile_counter].transform.parent = level_holder.transform;
 
 					start_tile_array[start_tile_counter].GetComponent<StartTileObject>().SetUpStartTile(1);
