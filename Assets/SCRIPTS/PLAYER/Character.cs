@@ -48,10 +48,6 @@ public class Character : MonoBehaviour
         [System.NonSerialized]
         public Vector3 inAirVelocity = Vector3.zero;
  
-        // This will keep track of how long we have we been in the air (not grounded)
-        [System.NonSerialized]
-        public float hangTime = 0.0f;
- 
     }
  
     [System.Serializable]
@@ -109,14 +105,19 @@ public class Character : MonoBehaviour
     protected Vector3 activeLocalPlatformPoint;
     protected Vector3 activeGlobalPlatformPoint;
     protected Vector3 lastPlatformVelocity;
- 
-    void Awake()
+
+    protected void CharacterAwake()
     {
         movement = new PlatformerControllerMovement();
         jump = new PlatformerControllerJumping();
         movement.direction = transform.TransformDirection(Vector3.forward);
         controller = GetComponent<CharacterController>();
         playerController = GetComponent<PlayerController>();
+    }
+ 
+    void Awake()
+    {
+    	CharacterAwake();
     }
  
     public void Spawn(Vector3 position)
@@ -154,15 +155,19 @@ public class Character : MonoBehaviour
 
         movement.speed = Mathf.Lerp(movement.speed, targetSpeed, curSmooth);
     }
- 
-    void FixedUpdate()
+
+    protected void CharacterFixedUpdate()
     {
         // Make sure we are absolutely always in the 2D plane.
         transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
- 
     }
  
-    void ApplyJumping()
+    void FixedUpdate()
+    {
+    	CharacterFixedUpdate();
+    }
+ 
+    protected void ApplyJumping()
     {
         // Prevent jumping too fast after each other
         if (jump.lastTime + jump.repeatTime > Time.time)
@@ -182,7 +187,7 @@ public class Character : MonoBehaviour
         }
     }
  
-    void ApplyGravity()
+   protected void ApplyGravity()
     {
         // Apply gravity
         bool jumpButton = playerController.jumping;
@@ -211,14 +216,14 @@ public class Character : MonoBehaviour
         movement.verticalSpeed = Mathf.Max(movement.verticalSpeed, -movement.maxFallSpeed);
     }
  
-    float CalculateJumpVerticalSpeed(float targetJumpHeight)
+    protected float CalculateJumpVerticalSpeed(float targetJumpHeight)
     {
         // From the jump height and gravity we deduce the upwards speed
         // for the character to reach at the apex.
         return Mathf.Sqrt(2 * targetJumpHeight * movement.gravity);
     }
  
-    void DidJump()
+    protected void DidJump()
     {
         jump.jumping = true;
         jump.reachedApex = false;
@@ -226,10 +231,10 @@ public class Character : MonoBehaviour
         jump.lastStartHeight = transform.position.y;
         jump.lastButtonTime = -10;
     }
- 
-    void Update()
+
+    protected void CharacterUpdate()
     {
-        if (playerController.jumping && canControl)
+    	if (playerController.jumping && canControl)
         {
             jump.lastButtonTime = Time.time;
         }
@@ -306,6 +311,11 @@ public class Character : MonoBehaviour
         }
     }
  
+    void Update()
+    {
+        CharacterUpdate();
+    }
+ 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.moveDirection.y > 0.01f)
@@ -320,44 +330,38 @@ public class Character : MonoBehaviour
     }
  
     // Various helper functions below:
-    float GetSpeed()
+    protected float GetSpeed()
     {
- 
         return movement.speed;
     }
  
-    Vector3 GetVelocity()
+    protected Vector3 GetVelocity()
     {
         return movement.velocity;
     }
  
  
-    bool IsMoving()
+    protected bool IsMoving()
     {
         return movement.isMoving;
     }
  
-    bool IsJumping()
+    protected bool IsJumping()
     {
         return jump.jumping;
     }
  
-    bool IsTouchingCeiling()
+    protected bool IsTouchingCeiling()
     {
         return (movement.collisionFlags & CollisionFlags.CollidedAbove) != 0;
     }
  
-    Vector3 GetDirection()
+    protected Vector3 GetDirection()
     {
         return movement.direction;
     }
  
-    float GetHangTime()
-    {
-        return movement.hangTime;
-    }
- 
-    void SetControllable(bool controllable)
+    protected void SetControllable(bool controllable)
     {
         canControl = controllable;
     }
