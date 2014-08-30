@@ -106,7 +106,7 @@ public class Character : MonoBehaviour
     protected Vector3 activeGlobalPlatformPoint;
     protected Vector3 lastPlatformVelocity;
 
-    protected void CharacterAwake()
+    protected virtual void CharacterAwake()
     {
         movement = new PlatformerControllerMovement();
         jump = new PlatformerControllerJumping();
@@ -130,7 +130,7 @@ public class Character : MonoBehaviour
         transform.position = position;
     }
  
-    protected void UpdateSmoothedMovementDirection()
+    protected virtual void UpdateSmoothedMovementDirection()
     {
         float h = 0.0f;
         if(playerController.goingLeft) 	h -= 1.0f;
@@ -156,7 +156,7 @@ public class Character : MonoBehaviour
         movement.speed = Mathf.Lerp(movement.speed, targetSpeed, curSmooth);
     }
 
-    protected void CharacterFixedUpdate()
+    protected virtual void CharacterFixedUpdate()
     {
         // Make sure we are absolutely always in the 2D plane.
         transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
@@ -167,7 +167,7 @@ public class Character : MonoBehaviour
     	CharacterFixedUpdate();
     }
  
-    protected void ApplyJumping()
+    protected virtual void ApplyJumping()
     {
         // Prevent jumping too fast after each other
         if (jump.lastTime + jump.repeatTime > Time.time)
@@ -187,7 +187,7 @@ public class Character : MonoBehaviour
         }
     }
  
-   protected void ApplyGravity()
+   protected virtual void ApplyGravity()
     {
         // Apply gravity
         bool jumpButton = playerController.jumping;
@@ -216,14 +216,14 @@ public class Character : MonoBehaviour
         movement.verticalSpeed = Mathf.Max(movement.verticalSpeed, -movement.maxFallSpeed);
     }
  
-    protected float CalculateJumpVerticalSpeed(float targetJumpHeight)
+    protected virtual float CalculateJumpVerticalSpeed(float targetJumpHeight)
     {
         // From the jump height and gravity we deduce the upwards speed
         // for the character to reach at the apex.
         return Mathf.Sqrt(2 * targetJumpHeight * movement.gravity);
     }
  
-    protected void DidJump()
+    protected virtual void DidJump()
     {
         jump.jumping = true;
         jump.reachedApex = false;
@@ -232,7 +232,7 @@ public class Character : MonoBehaviour
         jump.lastButtonTime = -10;
     }
 
-    protected void CharacterUpdate()
+    protected virtual void CharacterUpdate()
     {
     	if (playerController.jumping && canControl)
         {
@@ -311,7 +311,7 @@ public class Character : MonoBehaviour
         }
     }
  
-    void Update()
+    protected virtual void Update()
     {
         CharacterUpdate();
     }
@@ -330,38 +330,38 @@ public class Character : MonoBehaviour
     }
  
     // Various helper functions below:
-    protected float GetSpeed()
+    protected virtual float GetSpeed()
     {
         return movement.speed;
     }
  
-    protected Vector3 GetVelocity()
+    protected virtual Vector3 GetVelocity()
     {
         return movement.velocity;
     }
  
  
-    protected bool IsMoving()
+    protected virtual bool IsMoving()
     {
         return movement.isMoving;
     }
  
-    protected bool IsJumping()
+    protected virtual bool IsJumping()
     {
         return jump.jumping;
     }
  
-    protected bool IsTouchingCeiling()
+    protected virtual bool IsTouchingCeiling()
     {
         return (movement.collisionFlags & CollisionFlags.CollidedAbove) != 0;
     }
  
-    protected Vector3 GetDirection()
+    protected virtual Vector3 GetDirection()
     {
         return movement.direction;
     }
  
-    protected void SetControllable(bool controllable)
+    protected virtual void SetControllable(bool controllable)
     {
         canControl = controllable;
     }
