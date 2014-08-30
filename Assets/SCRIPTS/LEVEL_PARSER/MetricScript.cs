@@ -9,6 +9,10 @@ public class MetricScript : MonoBehaviour {
 	[ SerializeField ] float
 		TileSize;
 
+	[ SerializeField ] Vector3
+		SausageWarpSize,
+		NinjaWarpSize;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -22,6 +26,11 @@ public class MetricScript : MonoBehaviour {
 	public float GetTileSize(){
 		float tile_size = TileSize;
 		return tile_size;
+	}
+
+	public Vector3 GetSausageWarpSize(){
+		Vector3 sausage_warp_size = SausageWarpSize;
+		return sausage_warp_size;
 	}
 
 	// Update is called once per frame
