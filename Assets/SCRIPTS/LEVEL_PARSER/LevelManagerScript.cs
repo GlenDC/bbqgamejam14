@@ -9,7 +9,6 @@ public class LevelManagerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		LaunchLevelBuilding(0);
 	}
 
 	public void LaunchLevelBuilding(int level_id){

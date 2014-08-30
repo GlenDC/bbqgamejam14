@@ -159,6 +159,7 @@ public class LoaderManagerScript : MonoBehaviour {
 
 					blue_start_object = Instantiate(StartTilePrefab,start_tile_position,Quaternion.identity) as GameObject;
 					blue_start_object.name = "blue_start_tile";
+					blue_start_object.tag = "SPAWN_ONE";
 					blue_start_object.transform.parent = level_holder.transform;
 
 					blue_start_object.GetComponent<StartTileObject>().SetUpStartTile(0);
@@ -166,7 +167,8 @@ public class LoaderManagerScript : MonoBehaviour {
 				else if (tile_type == "red_start"){
 
 					red_start_object = Instantiate(StartTilePrefab,start_tile_position,Quaternion.identity) as GameObject;
-					red_start_object.name = "blue_start_tile";
+					red_start_object.name = "red_start_tile";
+					red_start_object.tag = "SPAWN_TWO";
 					red_start_object.transform.parent = level_holder.transform;
 
 					red_start_object.GetComponent<StartTileObject>().SetUpStartTile(1);
