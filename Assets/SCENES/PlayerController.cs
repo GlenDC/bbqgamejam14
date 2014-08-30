@@ -3,6 +3,13 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+	public enum EPlayerdID {
+		PlayerOne,
+		PlayerTwo
+	};
+
+	EPlayerdID playerID;
+
 	public bool goingLeft { private set; get; }
 	public bool goingRight { private set; get; }
 	public bool jumping { private set; get; }
@@ -13,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Init (EPlayerdID.PlayerOne);
 		goingLeft = false;
 		goingRight = false;
 		jumping = false;
@@ -21,29 +29,58 @@ public class PlayerController : MonoBehaviour {
 		submit = false;
 		cancel = false;
 	}
+
+	public void Init(EPlayerdID player)
+	{
+		playerID = player;
+	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetAxis("Horizontal") < -0.4){
+		if (playerID == EPlayerdID.PlayerTwo){
+			UpdatePlayerOne();
+		} else {
+			UpdatePlayerTwo();
+		}
+	}
+
+	void UpdatePlayerOne () {
+		if (Input.GetAxis("p1Horizontal") < -0.4){
 			goingLeft = true;
 		} else {
 			goingLeft = false;
 		}
-
-		if (Input.GetAxis("Horizontal") > 0.4){
+		
+		if (Input.GetAxis("p1Horizontal") > 0.4){
 			goingRight = true;
 		} else {
 			goingRight = false;
 		}
+		
+		jumping = Input.GetButton("p1Jump");		
+		special = Input.GetButton("p1Special");		
+		hasPressedMenu = Input.GetButton("Menu");		
+		submit = Input.GetButton("Submit");		
+		cancel = Input.GetButton("Cancel");
+	}
 
-		jumping = Input.GetButton("Fire1");
-
-		special = Input.GetButton("Fire3");
-
-		hasPressedMenu = Input.GetButton("Menu");
-
-		submit = Input.GetButton("Submit");
-
+	void UpdatePlayerTwo () {
+		if (Input.GetAxis("p2Horizontal") < -0.4){
+			goingLeft = true;
+		} else {
+			goingLeft = false;
+		}
+		
+		if (Input.GetAxis("p2Horizontal") > 0.4){
+			goingRight = true;
+		} else {
+			goingRight = false;
+		}
+		
+		jumping = Input.GetButton("p2Jump");		
+		special = Input.GetButton("p2Special");		
+		hasPressedMenu = Input.GetButton("Menu");		
+		submit = Input.GetButton("Submit");		
 		cancel = Input.GetButton("Cancel");
 	}
 }
