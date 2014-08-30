@@ -114,6 +114,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 893842658}
   m_RootOrder: 1
+--- !u!1 &291693586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 291693587}
+  m_Layer: 0
+  m_Name: SPAWN_ONE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &291693587
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 291693586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.4541416, y: -14.3278542, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!1001 &368218800
 Prefab:
   m_ObjectHideFlags: 0
@@ -123,11 +150,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400004, guid: 0b5d2b85c90f3d946a182a2367f175ce, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 17.4541416
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0b5d2b85c90f3d946a182a2367f175ce, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -14.3278542
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0b5d2b85c90f3d946a182a2367f175ce, type: 2}
       propertyPath: m_LocalPosition.z
@@ -153,6 +180,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 0b5d2b85c90f3d946a182a2367f175ce, type: 2}
+      propertyPath: m_Name
+      value: CHARACTER
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b5d2b85c90f3d946a182a2367f175ce, type: 2}
   m_RootGameObject: {fileID: 893842657}
@@ -166,10 +197,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 893842658}
-  - 50: {fileID: 893842659}
   - 114: {fileID: 893842660}
+  - 143: {fileID: 893842659}
+  - 114: {fileID: 893842661}
   m_Layer: 0
-  m_Name: CHARACTER_PREFAB
+  m_Name: CHARACTER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,28 +214,27 @@ Transform:
   m_PrefabInternal: {fileID: 368218800}
   m_GameObject: {fileID: 893842657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.4541416, y: -14.3278542, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1726799486}
   - {fileID: 281350850}
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!50 &893842659
-Rigidbody2D:
+--- !u!143 &893842659
+CharacterController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 893842657}
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 1
-  m_FixedAngle: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: .5
+  m_SlopeLimit: 45
+  m_StepOffset: .300000012
+  m_SkinWidth: .0799999982
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &893842660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +244,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dae6695dfa277746b8ca31c79c470ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canControl: 1
+  spawnPoint: {fileID: 291693587}
+  movement:
+    runSpeed: 10
+    inAirControlAcceleration: 1
+    gravity: 60
+    maxFallSpeed: 20
+    speedSmoothing: 20
+    rotationSmoothing: 10
+  jump:
+    enabled: 1
+    height: 1
+    extraHeight: 4.0999999
+    doubleJumpHeight: 2.0999999
+--- !u!114 &893842661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 893842657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f39b86e3ee618745b020e34e64968a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1689136181
