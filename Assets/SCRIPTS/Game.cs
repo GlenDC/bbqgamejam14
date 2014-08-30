@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum CharacterType
+{
+	Sausage,
+	Ninja
+}
+
 public class Game : MonoBehaviour
 {
 	GameObject playerOne, playerTwo;
@@ -8,27 +14,44 @@ public class Game : MonoBehaviour
 
 	void Start()
 	{
-		playerOne = (GameObject) Instantiate(Resources.Load("CHARACTER"));
-		playerTwo = (GameObject) Instantiate(Resources.Load("CHARACTER"));
-
-		playerOne.transform.parent = transform;
-		playerTwo.transform.parent = transform;
-
 		spawnOne = GameObject.FindWithTag("SPAWN_ONE").transform;
 		spawnTwo = GameObject.FindWithTag("SPAWN_TWO").transform;
 
-		playerOne.GetComponent<PlayerController>().Init(EPlayerID.PlayerOne);
-		playerTwo.GetComponent<PlayerController>().Init(EPlayerID.PlayerTwo);
-
-		playerOne.GetComponent<Character>().Spawn(spawnOne.position);
-		playerTwo.GetComponent<Character>().Spawn(spawnTwo.position);
-
-		playerOne.name = "Player One";
-		playerTwo.name = "Player Two";
+		CreateCharacter(EPlayerID.PlayerOne, CharacterType.Ninja);
+		CreateCharacter(EPlayerID.PlayerTwo, CharacterType.Ninja);
 	}
 
 	void Update()
 	{
 	
+	}
+
+	void CreateCharacter(EPlayerID playerID, CharacterType type)
+	{
+		GameObject character;
+		Vector3 spawnPosition;
+		string charName;
+
+		if(playerID == EPlayerID.PlayerOne)
+		{
+			character = playerOne;
+			charName = "Player One";
+			spawnPosition = spawnOne.position;
+		}
+		else
+		{
+			character = playerTwo;
+			charName = "Player Two";
+			spawnPosition = spawnTwo.position;
+		}
+
+		if(character)
+			Destroy(character);
+
+		character = (GameObject) Instantiate(Resources.Load(type == CharacterType.Sausage ? "SAUSAGE" : "NINJA"));
+		character.transform.parent = transform;
+		character.GetComponent<PlayerController>().Init(playerID);
+		character.GetComponent<Character>().Spawn(spawnPosition);
+		character.name = charName;
 	}
 }
