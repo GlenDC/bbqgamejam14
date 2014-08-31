@@ -37,16 +37,19 @@ public class Game : MonoBehaviour
 	{
 		GameObject character;
 		string charName;
+		Color charColor;
 
 		if(playerID == EPlayerID.PlayerOne)
 		{
 			character = playerOne;
 			charName = "PLAYER_ONE";
+			charColor = Color.red;
 		}
 		else
 		{
 			character = playerTwo;
 			charName = "PLAYER_TWO";
+			charColor = Color.blue;
 		}
 
 		if(character)
@@ -58,6 +61,15 @@ public class Game : MonoBehaviour
 		character.name = charName;
 		character.tag = charName;
 		character.layer = LayerMask.NameToLayer(charName);
+
+		foreach (Transform child in character.transform)
+		{
+		 	Renderer rndr = child.gameObject.GetComponent<Renderer>();
+		 	if(rndr)
+		 	{
+				rndr.material.color = charColor;
+		 	}
+		}
 
 		Character charaterScript = character.GetComponent<Character>();
 		charaterScript.Spawn(spawnPosition);
