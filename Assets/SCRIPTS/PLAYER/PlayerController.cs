@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour {
 			goingRight = false;
 		}
 
-		if (!goingLeft && !goingRight){
+		if (!goingLeft && !goingRight && !jumping && !special){
 
 			this.GetComponent<PlayerAnimater>().SetPlayerStanding();
 		}
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour {
 			goingRight = false;
 		}
 		
-		if (!goingLeft && !goingRight){
+		if (!goingLeft && !goingRight && !jumping && !special){
 			
 			this.GetComponent<PlayerAnimater>().SetPlayerStanding();
 		}
