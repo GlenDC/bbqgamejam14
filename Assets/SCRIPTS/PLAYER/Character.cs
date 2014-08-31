@@ -8,7 +8,8 @@ public class Character : MonoBehaviour
         Jump,
         Attack,
         Block,
-        Run
+        Run,
+        Ground
     }
  
     // Require a character controller to be attached to the same game object
@@ -372,6 +373,8 @@ public class Character : MonoBehaviour
                 jump.jumping = false;
  
                 SendMessage("DidLand", SendMessageOptions.DontRequireReceiver);
+
+                SetState(CharacterStates.Ground);
  
                 Vector3 jumpMoveDirection = movement.direction * movement.speed + movement.inAirVelocity;
                 if (jumpMoveDirection.sqrMagnitude > 0.01)
@@ -514,6 +517,11 @@ public class Character : MonoBehaviour
         
     }
 
+    protected virtual void OnCharacterGround()
+    {
+        
+    }
+
     protected void SetState(CharacterStates newState)
     {
         if(newState != characterState)
@@ -544,6 +552,11 @@ public class Character : MonoBehaviour
                 case CharacterStates.Run:
                     characterState = newState;
                     OnCharacterRun();
+                    break;
+
+                case CharacterStates.Ground:
+                    characterState = newState;
+                    OnCharacterGround();
                     break;
             }
         }
