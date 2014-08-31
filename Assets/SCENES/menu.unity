@@ -503,7 +503,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .25, g: .25, b: .25, a: .0196078438}
+  m_BackGroundColor: {r: .340884477, g: .713235259, b: .498957962, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -954,7 +954,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: .75
-  m_Text: NINJA GRIND MATCH
+  m_Text: NINJA CAT MATCH
 --- !u!222 &1748085735
 CanvasRenderer:
   m_ObjectHideFlags: 0
