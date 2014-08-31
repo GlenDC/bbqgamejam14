@@ -451,6 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canControl: 1
+  JumpSound: {fileID: 8300000, guid: 97879a19c95ddcf45a3f3e8278c68dfa, type: 3}
   movement:
     runSpeed: 9
     inAirControlAcceleration: 1
@@ -481,6 +482,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0291a7511fcf25d498406a934aa5b8ae, type: 3}
   - {fileID: 8300000, guid: b5d756ab11f8e054180ddb9d53013c59, type: 3}
   - {fileID: 8300000, guid: dfab7ac2fb002424aae0663412d2a843, type: 3}
+  BlockSound: {fileID: 8300000, guid: bd6c7ad07cd7f334c9a45c3be32f40c0, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,6 +2,14 @@
  
 public class Character : MonoBehaviour
 {
+    protected enum CharacterStates
+    {
+        Idle,
+        Jump,
+        Attack,
+        Block,
+        Run
+    }
  
     // Require a character controller to be attached to the same game object
     [System.Serializable]
@@ -105,6 +113,8 @@ public class Character : MonoBehaviour
 
     // Does this script currently respond to Input?
     public bool canControl = true;
+
+    public AudioClip JumpSound;
  
     public PlatformerControllerMovement movement;
  
@@ -115,6 +125,8 @@ public class Character : MonoBehaviour
     public PlayerThrowback throwback;
 
     public GameManager gameManager;
+
+    CharacterStates characterState;
 
     protected AudioSource audioSource;
  
@@ -281,8 +293,7 @@ public class Character : MonoBehaviour
         jump.lastStartHeight = transform.position.y;
         jump.lastButtonTime = -10;
         jump.currentExtraHeightTime = 0.0f;
-
-		this.GetComponent<PlayerAnimater>().SetPlayerJumping();
+        SetState(CharacterStates.Jump);
     }
 
     protected virtual void CharacterUpdate()
@@ -473,6 +484,67 @@ public class Character : MonoBehaviour
 
             if (trigger_collider.gameObject.GetComponent<WarpTileObject>().GetWarpOn()){
                 OnNinjaWarp();
+            }
+        }
+    }
+
+    protected virtual void OnCharacterIdle()
+    {
+
+    }
+
+    protected virtual void OnCharacterAttack()
+    {
+        
+    }
+
+    protected virtual void OnCharacterJump()
+    {
+        audioSource.PlayOneShot(JumpSound);
+        this.GetComponent<PlayerAnimater>().SetPlayerJumping();
+    }
+
+    protected virtual void OnCharacterBlock()
+    {
+        
+    }
+
+    protected virtual void OnCharacterRun()
+    {
+        
+    }
+
+    protected void SetState(CharacterStates newState)
+    {
+        if(newState != characterState)
+        {
+            switch(newState)
+            {
+                case CharacterStates.Idle:
+                    characterState = newState;
+                    OnCharacterIdle();
+                    break;
+
+                case CharacterStates.Attack:
+                    if(characterState != CharacterStates.Block)
+                        characterState = newState;
+                    OnCharacterAttack();
+                    break;
+
+                case CharacterStates.Jump:
+                    characterState = newState;
+                    OnCharacterJump();
+                    break;
+
+                case CharacterStates.Block:
+                    characterState = newState;
+                    OnCharacterBlock();
+                    break;
+
+                case CharacterStates.Run:
+                    characterState = newState;
+                    OnCharacterRun();
+                    break;
             }
         }
     }

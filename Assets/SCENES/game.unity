@@ -1107,7 +1107,6 @@ GameObject:
   - 114: {fileID: 1826527403}
   - 114: {fileID: 1826527402}
   - 114: {fileID: 1826527401}
-  - 114: {fileID: 1826527405}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1168,23 +1167,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!114 &1826527405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1826527400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: p2Horizontal
-  m_VerticalAxis: p2Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_AllowActivationOnMobileDevice: 0
 --- !u!1 &1920174082
 GameObject:
   m_ObjectHideFlags: 0

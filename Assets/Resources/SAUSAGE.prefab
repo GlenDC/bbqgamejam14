@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canControl: 1
+  JumpSound: {fileID: 8300000, guid: 97879a19c95ddcf45a3f3e8278c68dfa, type: 3}
   movement:
     runSpeed: 10
     inAirControlAcceleration: 1

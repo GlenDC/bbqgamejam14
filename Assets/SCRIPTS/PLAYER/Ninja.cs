@@ -13,6 +13,8 @@ public class Ninja : Character
 
 	public AudioClip[] AttackSounds = new AudioClip[5];
 
+	public AudioClip BlockSound;
+
 	float attackIBCT;
 	float feedbackIBCT;
 
@@ -56,15 +58,24 @@ public class Ninja : Character
 				enemyDir.y -= 0.5f;
 			GetEnemy().GetComponent<Character>().onAttacked(enemyDir);
 		}
+
+		if(playerController.special)
+		{
+			SetState(CharacterStates.Attack);
+		}
+		else
+		{
+			SetState(CharacterStates.Idle);
+		}
     }
 
     public override void onAttacked(Vector3 dir)
     {
+    	SetState(CharacterStates.Block);
     	if(attackIBCT >= attackedInBetweenDelay)
     	{
     		attackIBCT = 0.0f;
         	throwback.currentThrowback = throwback.throwBackStrength * dir;
-        	audioSource.PlayOneShot(AttackSounds[rnd.Next(0, AttackSounds.Length)]);
     	}
     }
 
@@ -86,4 +97,14 @@ public class Ninja : Character
 			}
 		}
 	}
+
+    protected override void OnCharacterAttack()
+    {
+        audioSource.PlayOneShot(AttackSounds[rnd.Next(0, AttackSounds.Length)]);
+    }
+
+    protected override void OnCharacterBlock()
+    {
+        audioSource.PlayOneShot(BlockSound);
+    }
 }
