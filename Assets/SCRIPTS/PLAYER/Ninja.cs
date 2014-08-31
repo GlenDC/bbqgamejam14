@@ -44,10 +44,10 @@ public class Ninja : Character
 				onFeedback(enemyDir);
 			}
 
-			if(posEnemy.x + 0.2f >= transform.position.x)
-				enemyDir.y += 0.5f;
+			if(posEnemy.x + 0.5 >= transform.position.x)
+				enemyDir.y += 1.0f;
 			else
-				enemyDir.y -= 0.25f;
+				enemyDir.y -= 0.5f;
 
 			GetEnemy().GetComponent<Character>().onAttacked(enemyDir);
 		}
