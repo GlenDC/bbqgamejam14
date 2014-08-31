@@ -4,7 +4,8 @@ using System.Collections;
 public class WarpTileObject : MonoBehaviour {
 
 	[ SerializeField ] GameObject
-		WarpObject;
+		BigSawObject,
+		SmallSawObject;
 
 	string
 		WarpTag;
@@ -27,6 +28,10 @@ public class WarpTileObject : MonoBehaviour {
 		if (WarpType == 0){
 
 			WarpTag = "SAUSAGE_WARP";
+
+			BigSawObject.GetComponent<ObjectRotation>().LaunchObjectRotation(1.0f);
+
+			SmallSawObject.GetComponent<ObjectRotation>().LaunchObjectRotation(-1.0f);
 
 			this.tag = WarpTag;
 		}
@@ -52,7 +57,8 @@ public class WarpTileObject : MonoBehaviour {
 
 	public void DisplayWarp(bool warp_displayed){
 
-		WarpObject.renderer.enabled = warp_displayed;
+		BigSawObject.renderer.enabled = warp_displayed;
+		SmallSawObject.renderer.enabled = warp_displayed;
 
 		WarpOn = warp_displayed;
 	}
