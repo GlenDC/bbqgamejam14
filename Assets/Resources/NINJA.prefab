@@ -160,8 +160,8 @@ MonoBehaviour:
     speedSmoothing: 0
   jump:
     enabled: 1
-    height: .400000006
-    extraHeightTime: .100000001
+    height: .5
+    extraHeightTime: .00999999978
     currentExtraHeightTime: 0
   throwback:
     throwBackStrength: 15
