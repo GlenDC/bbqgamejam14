@@ -70,6 +70,9 @@ public class Character : MonoBehaviour
         public float height = 1.0f;
  
         public float doubleJumpHeight = 2.1f;
+
+        public float doubleJumpTime = 0.5f;
+        public float currentTime = 0.0f;
  
         // Are where double jumping? ( Initiated when jumping or falling after pressing the jump button )
         [System.NonSerialized]
@@ -271,9 +274,9 @@ public class Character : MonoBehaviour
 
         // * When jumping up we don't apply gravity for some time when the user is holding the jump button
         //   This gives more control over jump height by pressing the button longer
-        bool extraPowerJump = jump.jumping && jump.doubleJumping && !jump.doubleJumped && movement.verticalSpeed > 0.0 && jumpButton && !IsTouchingCeiling();
+        bool extraPowerJump = jump.jumping && jump.doubleJumping && movement.verticalSpeed > 0.0 && jumpButton && !IsTouchingCeiling();
  
-        if (extraPowerJump)
+        if (jump.doubleJumped && jump.currentTime < jump.doubleJumpTime)
         {
             return;
         }
@@ -322,6 +325,7 @@ public class Character : MonoBehaviour
             jump.doubleJumping = true;
             movement.verticalSpeed = CalculateJumpVerticalSpeed(jump.doubleJumpHeight);
             jump.canDoubleJump = false;
+            jump.doubleJumped = true;
  
         }
     	if (jumpButton && canControl)
@@ -331,6 +335,9 @@ public class Character : MonoBehaviour
         }
  
         UpdateSmoothedMovementDirection();
+
+        if(jump.currentTime < jump.doubleJumpTime)
+            jump.currentTime += Time.deltaTime;
  
         // Apply gravity
         // - extra power jump modifies gravity
@@ -396,6 +403,8 @@ public class Character : MonoBehaviour
                 jump.doubleJumping = false;
                 jump.canDoubleJump = false;
                 jump.doubleJumped = false;
+
+                jump.currentTime = 0.0f;
  
                 SendMessage("DidLand", SendMessageOptions.DontRequireReceiver);
 
