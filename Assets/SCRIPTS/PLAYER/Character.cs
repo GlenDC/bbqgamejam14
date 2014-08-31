@@ -122,6 +122,8 @@ public class Character : MonoBehaviour
     protected Vector3 activeGlobalPlatformPoint;
     protected Vector3 lastPlatformVelocity;
 
+    public Game game;
+
     protected EPlayerID playerID;
 
     protected virtual void CharacterAwake()
@@ -422,6 +424,40 @@ public class Character : MonoBehaviour
     public virtual void onFeedback(Vector3 dir)
     {
         Debug.Log("Shouldn't happen!");
+    }
+
+    protected void OnSausageWarp()
+    {
+        GameObject level_holder = GameObject.FindGameObjectWithTag("LEVEL_HOLDER");
+        level_holder.GetComponent<LevelHolder>().TriggerNinjaWarp();
+
+        Vector3 position = transform.position;
+        game.CreateCharacter(playerID, CharacterType.Sausage, position);
+    }
+
+    protected void OnNinjaWarp()
+    {
+        GameObject level_holder = GameObject.FindGameObjectWithTag("LEVEL_HOLDER");
+        level_holder.GetComponent<LevelHolder>().TriggerSausageWarp();
+
+        Vector3 position = transform.position;
+        game.CreateCharacter(playerID, CharacterType.Ninja, position);
+    }
+
+    public virtual void OnTriggerEnter(Collider trigger_collider){
+
+        if (trigger_collider.gameObject.tag == "SAUSAGE_WARP"){
+
+            if (trigger_collider.gameObject.GetComponent<WarpTileObject>().GetWarpOn()){
+                OnSausageWarp();
+            }
+        }
+        else if (trigger_collider.gameObject.tag == "NINJA_WARP"){
+
+            if (trigger_collider.gameObject.GetComponent<WarpTileObject>().GetWarpOn()){
+                OnNinjaWarp();
+            }
+        }
     }
 }
  

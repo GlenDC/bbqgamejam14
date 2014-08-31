@@ -21,8 +21,8 @@ public class Game : MonoBehaviour
 		spawnOne = GameObject.FindWithTag("SPAWN_ONE").transform;
 		spawnTwo = GameObject.FindWithTag("SPAWN_TWO").transform;
 
-		CreateCharacter(EPlayerID.PlayerOne, CharacterType.Ninja);
-		CreateCharacter(EPlayerID.PlayerTwo, CharacterType.Ninja);
+		CreateCharacter(EPlayerID.PlayerOne, CharacterType.Ninja, spawnOne.position);
+		CreateCharacter(EPlayerID.PlayerTwo, CharacterType.Ninja, spawnTwo.position);
 	}
 
 	void Update()
@@ -30,23 +30,20 @@ public class Game : MonoBehaviour
 	
 	}
 
-	void CreateCharacter(EPlayerID playerID, CharacterType type)
+	public void CreateCharacter(EPlayerID playerID, CharacterType type, Vector3 spawnPosition)
 	{
 		GameObject character;
-		Vector3 spawnPosition;
 		string charName;
 
 		if(playerID == EPlayerID.PlayerOne)
 		{
 			character = playerOne;
 			charName = "PLAYER_ONE";
-			spawnPosition = spawnOne.position;
 		}
 		else
 		{
 			character = playerTwo;
 			charName = "PLAYER_TWO";
-			spawnPosition = spawnTwo.position;
 		}
 
 		if(character)
@@ -62,5 +59,15 @@ public class Game : MonoBehaviour
 		Character charaterScript = character.GetComponent<Character>();
 		charaterScript.Spawn(spawnPosition);
 		charaterScript.SetPlayerID(playerID);
+		charaterScript.game = this;
+
+		if(playerID == EPlayerID.PlayerOne)
+		{
+			playerOne = character;
+		}
+		else
+		{
+			playerTwo = character;
+		}
 	}
 }

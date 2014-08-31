@@ -71,22 +71,12 @@ public class Ninja : Character
     	}
     }
 
-	public void OnTriggerEnter(Collider trigger_collider){
+	public override void OnTriggerEnter(Collider trigger_collider){
 
 		if (trigger_collider.gameObject.tag == "SAUSAGE_WARP"){
 
 			if (trigger_collider.gameObject.GetComponent<WarpTileObject>().GetWarpOn()){
-
-				GameObject level_holder = GameObject.FindGameObjectWithTag("LEVEL_HOLDER");
-				level_holder.GetComponent<LevelHolder>().TriggerNinjaWarp();
-			}
-		}
-		else if (trigger_collider.gameObject.tag == "NINJA_WARP"){
-
-			if (trigger_collider.gameObject.GetComponent<WarpTileObject>().GetWarpOn()){
-
-				GameObject level_holder = GameObject.FindGameObjectWithTag("LEVEL_HOLDER");
-				level_holder.GetComponent<LevelHolder>().TriggerSausageWarp();
+                OnSausageWarp();
 			}
 		}
 	}
