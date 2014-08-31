@@ -59,6 +59,11 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			goingRight = false;
 		}
+
+		if (!goingLeft && !goingRight){
+
+			this.GetComponent<PlayerAnimater>().SetPlayerStanding();
+		}
 		
 		jumping = Input.GetButton("p1Jump");		
 		special = Input.GetButton("p1Special");		
@@ -82,6 +87,11 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<PlayerAnimater>().SetPlayerRunning();
 		} else {
 			goingRight = false;
+		}
+		
+		if (!goingLeft && !goingRight){
+			
+			this.GetComponent<PlayerAnimater>().SetPlayerStanding();
 		}
 		
 		jumping = Input.GetButton("p2Jump");		
