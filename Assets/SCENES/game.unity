@@ -117,6 +117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterSize: .5
   TileSize: .639999986
+  SausageWarpSize: {x: 0, y: 0, z: 0}
+  NinjaWarpSize: {x: 0, y: 0, z: 0}
 --- !u!114 &892242355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelList:
-  - {fileID: 4900000, guid: d39b2265434634743b8492a9593d20ab, type: 3}
+  - {fileID: 4900000, guid: 35724268858734be7b31945f12919e26, type: 3}
 --- !u!1 &1689136181
 GameObject:
   m_ObjectHideFlags: 0

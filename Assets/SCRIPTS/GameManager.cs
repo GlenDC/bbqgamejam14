@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButton("Menu") || Input.GetButton("Submit")) {
+		if (Input.GetButton("Menu")) {
 			Application.LoadLevel("menu");
 		}
 	}
