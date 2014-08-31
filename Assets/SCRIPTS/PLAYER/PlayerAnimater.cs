@@ -14,7 +14,8 @@ public class PlayerAnimater : MonoBehaviour {
 	bool
 		DirectionLeft,
 		DirectionRight,
-		InAir;
+		InAir,
+		IsBlocking;
 
 	Vector3
 		StandingScaleLeft,
@@ -86,6 +87,7 @@ public class PlayerAnimater : MonoBehaviour {
 
 		if (direction_left){
 
+			StandingAnimation.transform.localScale = StandingScaleLeft;
 			RunAnimation.transform.localScale = RunScaleLeft;
 			if(AttackAnimation)
 				AttackAnimation.transform.localScale = AttackScaleLeft;
@@ -96,6 +98,7 @@ public class PlayerAnimater : MonoBehaviour {
 		}
 		else if (direction_right){
 
+			StandingAnimation.transform.localScale = StandingScaleRight;
 			RunAnimation.transform.localScale = RunScaleRight;
 			if(AttackAnimation)
 				AttackAnimation.transform.localScale = AttackScaleRight;
@@ -108,15 +111,18 @@ public class PlayerAnimater : MonoBehaviour {
 
 	public void SetPlayerStanding(){
 
-		StandingAnimation.renderer.enabled = true;
+		if (!IsBlocking){
 
-		RunAnimation.renderer.enabled = false;
-		if(AttackAnimation)
-			AttackAnimation.renderer.enabled = false;
-		JumpAnimation.renderer.enabled = false;
-		if(BlockAnimation)
-			BlockAnimation.renderer.enabled = false;
-		FlyAnimation.renderer.enabled = false;
+			StandingAnimation.renderer.enabled = true;
+
+			RunAnimation.renderer.enabled = false;
+			if(AttackAnimation)
+				AttackAnimation.renderer.enabled = false;
+			JumpAnimation.renderer.enabled = false;
+			if(BlockAnimation)
+				BlockAnimation.renderer.enabled = false;
+			FlyAnimation.renderer.enabled = false;
+		}
 	}
 
 	public void SetPlayerRunning (){
@@ -174,6 +180,10 @@ public class PlayerAnimater : MonoBehaviour {
 	}
 
 	public void SetPlayerBlocking(){
+
+		Debug.Log ("character blocks");
+		BlockAnimation.renderer.enabled = true;
+
 		if(AttackAnimation && BlockAnimation)
 		{
 			AttackAnimation.renderer.enabled = true;
@@ -181,8 +191,8 @@ public class PlayerAnimater : MonoBehaviour {
 			StandingAnimation.renderer.enabled = false;
 			FlyAnimation.renderer.enabled = false;
 			RunAnimation.renderer.enabled = false;
-			if(BlockAnimation)
-				BlockAnimation.renderer.enabled = false;
+			if(!BlockAnimation)
+				BlockAnimation.renderer.enabled = true;
 			JumpAnimation.renderer.enabled = false;
 		}
 	}

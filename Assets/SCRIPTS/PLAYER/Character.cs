@@ -208,7 +208,7 @@ public class Character : MonoBehaviour
         movement.isMoving = Mathf.Abs(h) > 0.1;
  
         if (movement.isMoving)
-            movement.direction = new Vector3(h, 0, 0);
+			movement.direction = new Vector3(h, 0, 0);
  
         // Smooth the speed based on the current target direction
         float curSmooth = movement.speedSmoothing * Time.deltaTime;
