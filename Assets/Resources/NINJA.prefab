@@ -153,19 +153,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canControl: 1
   movement:
-    runSpeed: 8
+    runSpeed: 9
     inAirControlAcceleration: 1
     gravity: 70
     maxFallSpeed: 25
-    speedSmoothing: 25
+    speedSmoothing: 1
   jump:
     enabled: 1
-    height: .5
-    extraHeightTime: .200000003
+    height: .400000006
+    extraHeightTime: .100000001
     currentExtraHeightTime: 0
   throwback:
-    throwBackStrength: 10
-    feedbackStrength: 2
+    throwBackStrength: 15
+    feedbackStrength: 4
     throwbackDeaccelerationValue: .949999988
     currentThrowback: {x: 0, y: 0, z: 0}
   meshRenderer: {fileID: 2300000}
