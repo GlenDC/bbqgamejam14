@@ -481,16 +481,18 @@ MonoBehaviour:
   canControl: 1
   JumpSound: {fileID: 8300000, guid: 97879a19c95ddcf45a3f3e8278c68dfa, type: 3}
   movement:
-    runSpeed: 10
-    inAirControlAcceleration: 1
-    gravity: 60
+    runSpeed: 9
+    inAirControlAcceleration: 4
+    gravity: 40
     maxFallSpeed: 20
-    speedSmoothing: 20
+    speedSmoothing: 0
   jump:
     enabled: 1
-    height: 1
-    extraHeightTime: .5
-    currentExtraHeightTime: 0
+    height: 10
+    doubleJumpHeight: 5
+    doubleJumpTime: .125
+    currentTime: 0
+    doubleJumped: 0
   throwback:
     throwBackStrength: 10
     feedbackStrength: 2
