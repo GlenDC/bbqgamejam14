@@ -44,6 +44,11 @@ public class Ninja : Character
 				onFeedback(enemyDir);
 			}
 
+			if(posEnemy.x + 0.5 >= transform.position.x)
+				enemyDir.y += 1.0f;
+			else
+				enemyDir.y -= 0.5f;
+
 			GetEnemy().GetComponent<Character>().onAttacked(enemyDir);
 		}
     }
@@ -53,7 +58,7 @@ public class Ninja : Character
     	if(attackIBCT >= attackedInBetweenDelay)
     	{
     		attackIBCT = 0.0f;
-        	throwback.currentThrowback.x = throwback.throwBackStrength * dir.x;
+        	throwback.currentThrowback = throwback.throwBackStrength * dir;
     	}
     }
 
@@ -62,7 +67,7 @@ public class Ninja : Character
     	if(feedbackIBCT >= feedbackInBetweenDelay)
     	{
     		feedbackIBCT = 0.0f;
-        	throwback.currentThrowback.x = throwback.feedbackStrength * dir.x * -1.0f;
+        	throwback.currentThrowback = throwback.feedbackStrength * dir * -1.0f;
     	}
     }
 

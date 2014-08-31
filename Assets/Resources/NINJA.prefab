@@ -153,18 +153,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canControl: 1
   movement:
-    runSpeed: 8
+    runSpeed: 9
     inAirControlAcceleration: 1
     gravity: 70
     maxFallSpeed: 25
-    speedSmoothing: 25
+    speedSmoothing: 0
   jump:
     enabled: 1
     height: .5
-    extraHeight: .25
+    extraHeightTime: .00999999978
+    currentExtraHeightTime: 0
   throwback:
-    throwBackStrength: 10
-    feedbackStrength: 2
+    throwBackStrength: 15
+    feedbackStrength: 4
     throwbackDeaccelerationValue: .949999988
     currentThrowback: {x: 0, y: 0, z: 0}
   meshRenderer: {fileID: 2300000}
@@ -193,9 +194,9 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1
   m_Radius: .400000006
-  m_SlopeLimit: 45
-  m_StepOffset: .300000012
-  m_SkinWidth: .0799999982
+  m_SlopeLimit: 0
+  m_StepOffset: 0
+  m_SkinWidth: .100000001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
