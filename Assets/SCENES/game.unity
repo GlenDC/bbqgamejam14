@@ -165,7 +165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelList:
+  - {fileID: 4900000, guid: 73317e2a94b1d440b9caf287bf5b7ad5, type: 3}
   - {fileID: 4900000, guid: 35724268858734be7b31945f12919e26, type: 3}
+  - {fileID: 4900000, guid: 0c8d1e6abb9cb404a9629992c654c336, type: 3}
 --- !u!4 &232387360
 Transform:
   m_ObjectHideFlags: 0

@@ -389,8 +389,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1965715379}
+  m_RootOrder: 2
 --- !u!1 &1312730836
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,8 +535,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 1965715379}
+  m_RootOrder: 1
 --- !u!1 &1481979399
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,13 +724,52 @@ RectTransform:
   - {fileID: 35077576}
   - {fileID: 1312730837}
   - {fileID: 1908352851}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 1965715379}
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1566845243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1566845244}
+  - 114: {fileID: 1566845245}
+  m_Layer: 0
+  m_Name: PlayerSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1566845244
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1566845243}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 41.4531555, y: 9.32318783, z: 41.1427689}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+--- !u!114 &1566845245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1566845243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d4f6311465bc14c832798e210396c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1611781425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,9 +1180,12 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1494284819}
+  - {fileID: 1373524171}
+  - {fileID: 1269810874}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &1965715380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1155,3 +1197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 936890eb4501eca4ba3aafddbdc86fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSettings: {fileID: 1566845245}
+  levelNames:
+  - BUTCHER BAY
+  - HEAVEN
+  - CHRISTMAS
+  delayTimeButtons: .5

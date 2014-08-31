@@ -16,7 +16,7 @@ public class Game : MonoBehaviour
 
 	void Start()
 	{
-		levelManager.LaunchLevelBuilding(0);
+		levelManager.LaunchLevelBuilding(PlayerSettings.playerLevel);
 
 		spawnOne = GameObject.FindWithTag("SPAWN_ONE").transform;
 		spawnTwo = GameObject.FindWithTag("SPAWN_TWO").transform;
