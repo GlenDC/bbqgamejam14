@@ -115,6 +115,8 @@ public class Character : MonoBehaviour
     public PlayerThrowback throwback;
 
     public GameManager gameManager;
+
+    protected AudioSource audioSource;
  
     protected CharacterController controller;
  
@@ -135,6 +137,7 @@ public class Character : MonoBehaviour
         movement.direction = transform.TransformDirection(Vector3.forward);
         controller = GetComponent<CharacterController>();
         playerController = GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
     }
  
     protected virtual void Awake()

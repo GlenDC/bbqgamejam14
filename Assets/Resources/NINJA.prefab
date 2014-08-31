@@ -49,6 +49,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 95: {fileID: 9500006}
   - 212: {fileID: 21200010}
+  - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: NINJA
   m_TagString: Player
@@ -309,6 +310,64 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.08999991, y: 1.69000006, z: 1}
   m_Center: {x: 0, y: .460000008, z: 0}
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -416,6 +475,12 @@ MonoBehaviour:
   inRange: {fileID: 2100000, guid: b1f9a687568a09146ac7631b8210ef05, type: 2}
   attackedInBetweenDelay: .5
   feedbackInBetweenDelay: .5
+  AttackSounds:
+  - {fileID: 8300000, guid: 6108b6f3feb5fac4d88c273e2561f9d1, type: 3}
+  - {fileID: 8300000, guid: ae31d237e1070ce4a96eda2bc45318ce, type: 3}
+  - {fileID: 8300000, guid: 0291a7511fcf25d498406a934aa5b8ae, type: 3}
+  - {fileID: 8300000, guid: b5d756ab11f8e054180ddb9d53013c59, type: 3}
+  - {fileID: 8300000, guid: dfab7ac2fb002424aae0663412d2a843, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

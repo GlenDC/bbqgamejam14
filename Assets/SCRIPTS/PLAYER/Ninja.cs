@@ -11,8 +11,12 @@ public class Ninja : Character
 	public float attackedInBetweenDelay = 0.5f;
 	public float feedbackInBetweenDelay = 0.5f;
 
+	public AudioClip[] AttackSounds = new AudioClip[5];
+
 	float attackIBCT;
 	float feedbackIBCT;
+
+	System.Random rnd;
 
 	protected override void Awake()
     {
@@ -20,6 +24,8 @@ public class Ninja : Character
 
     	attackIBCT = attackedInBetweenDelay;
 		feedbackIBCT = feedbackInBetweenDelay;
+
+		rnd = new System.Random();
     }
 
 	protected override void Update()
@@ -48,7 +54,6 @@ public class Ninja : Character
 				enemyDir.y += 1.0f;
 			else
 				enemyDir.y -= 0.5f;
-
 			GetEnemy().GetComponent<Character>().onAttacked(enemyDir);
 		}
     }
@@ -59,6 +64,7 @@ public class Ninja : Character
     	{
     		attackIBCT = 0.0f;
         	throwback.currentThrowback = throwback.throwBackStrength * dir;
+        	audioSource.PlayOneShot(AttackSounds[rnd.Next(0, AttackSounds.Length)]);
     	}
     }
 
