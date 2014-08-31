@@ -7,6 +7,9 @@ TagManager:
   - SPAWN_TWO
   - PLAYER_ONE
   - PLAYER_TWO
+  - SAUSAGE_WARP
+  - NINJA_WARP
+  - LEVEL_HOLDER
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

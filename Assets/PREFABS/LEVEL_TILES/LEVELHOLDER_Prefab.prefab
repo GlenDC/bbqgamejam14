@@ -39,6 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62634e1c792a45f4b068b645d350324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NinjaWarpTimer: 7
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5722db42e6448f243b347827f80fc76c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterSize: .5
+  CharacterSize: 2
   TileSize: .639999986
 --- !u!114 &1807056843
 MonoBehaviour:
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelList:
-  - {fileID: 4900000, guid: 73317e2a94b1d440b9caf287bf5b7ad5, type: 3}
+  - {fileID: 4900000, guid: 35724268858734be7b31945f12919e26, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
