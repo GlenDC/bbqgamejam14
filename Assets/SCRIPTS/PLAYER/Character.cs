@@ -89,6 +89,18 @@ public class Character : MonoBehaviour
         [System.NonSerialized]
         public float lastStartHeight = 0.0f;
     }
+
+    [System.Serializable]
+    public class PlayerThrowback
+    {
+        public float throwBackStrength = 10.0f;
+        public float feedbackStrength = 2.0f;
+
+        public float throwbackDeaccelerationValue = 0.95f;
+
+        public Vector3 currentThrowback = new Vector3(0.0f, 0.0f, 0.0f);
+    }
+
     // Does this script currently respond to Input?
     public bool canControl = true;
  
@@ -97,6 +109,8 @@ public class Character : MonoBehaviour
  	protected PlayerController playerController; // input controller
  
     public PlatformerControllerJumping jump;
+
+    public PlayerThrowback throwback;
  
     protected CharacterController controller;
  
@@ -287,6 +301,7 @@ public class Character : MonoBehaviour
  
         // Calculate actual motion
         Vector3 currentMovementOffset = movement.direction * movement.speed + new Vector3(0, movement.verticalSpeed, 0) + movement.inAirVelocity;
+        currentMovementOffset += throwback.currentThrowback;
  
         // We always want the movement to be framerate independent.  Multiplying by Time.deltaTime does this.
         currentMovementOffset *= Time.deltaTime;
@@ -328,6 +343,8 @@ public class Character : MonoBehaviour
                     movement.direction = jumpMoveDirection.normalized;
             }
         }
+
+        throwback.currentThrowback *= throwback.throwbackDeaccelerationValue;
     }
  
     protected virtual void Update()
@@ -385,12 +402,12 @@ public class Character : MonoBehaviour
         canControl = controllable;
     }
 
-    public virtual void onAttacked()
+    public virtual void onAttacked(Vector3 dir)
     {
         Debug.Log("Kill!");
     }
 
-    public virtual void onFeedback()
+    public virtual void onFeedback(Vector3 dir)
     {
         Debug.Log("Shouldn't happen!");
     }

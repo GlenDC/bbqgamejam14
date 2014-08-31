@@ -55,9 +55,12 @@ public class Game : MonoBehaviour
 		character = (GameObject) Instantiate(Resources.Load(type == CharacterType.Sausage ? "SAUSAGE" : "NINJA"));
 		character.transform.parent = transform;
 		character.GetComponent<PlayerController>().Init(playerID);
-		character.GetComponent<Character>().Spawn(spawnPosition);
 		character.name = charName;
 		character.tag = charName;
 		character.layer = LayerMask.NameToLayer(charName);
+
+		Character charaterScript = character.GetComponent<Character>();
+		charaterScript.Spawn(spawnPosition);
+		charaterScript.SetPlayerID(playerID);
 	}
 }

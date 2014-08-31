@@ -33,32 +33,36 @@ public class Ninja : Character
 		if(feedbackIBCT < feedbackInBetweenDelay)
 			feedbackIBCT += Time.deltaTime;
 
-		if (inRange && playerController.special)
+		if (rangeChecker.enemyIsInRange && playerController.special)
 		{
+			Vector3 posEnemy = GetEnemy().transform.position;
+			Vector3 enemyDir = posEnemy - transform.position;
+			enemyDir.Normalize();
+
 			if (!controller.isGrounded)
 			{
-				onFeedback();
+				onFeedback(enemyDir);
 			}
 
-			GetEnemy().GetComponent<Character>().onAttacked();
+			GetEnemy().GetComponent<Character>().onAttacked(enemyDir);
 		}
     }
 
-    public override void onAttacked()
+    public override void onAttacked(Vector3 dir)
     {
     	if(attackIBCT >= attackedInBetweenDelay)
     	{
     		attackIBCT = 0.0f;
-        	Debug.Log("Change to wurst!");
+        	throwback.currentThrowback.x = throwback.throwBackStrength * dir.x;
     	}
     }
 
-    public override void onFeedback()
+    public override void onFeedback(Vector3 dir)
     {
     	if(feedbackIBCT >= feedbackInBetweenDelay)
     	{
     		feedbackIBCT = 0.0f;
-        	Debug.Log("Ouch");
+        	throwback.currentThrowback.x = throwback.feedbackStrength * dir.x * -1.0f;
     	}
     }
 }
