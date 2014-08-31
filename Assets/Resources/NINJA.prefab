@@ -157,7 +157,7 @@ MonoBehaviour:
     inAirControlAcceleration: 1
     gravity: 70
     maxFallSpeed: 25
-    speedSmoothing: 1
+    speedSmoothing: 0
   jump:
     enabled: 1
     height: .400000006

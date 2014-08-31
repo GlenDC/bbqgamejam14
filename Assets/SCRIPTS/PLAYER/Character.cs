@@ -189,6 +189,9 @@ public class Character : MonoBehaviour
         targetSpeed *= movement.runSpeed;
 
         movement.speed = Mathf.Lerp(movement.speed, targetSpeed, curSmooth);
+
+        // HACK: no smoothing
+        movement.speed = targetSpeed;
     }
 
     protected virtual void CharacterFixedUpdate()
