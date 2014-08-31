@@ -454,15 +454,15 @@ MonoBehaviour:
   JumpSound: {fileID: 8300000, guid: 97879a19c95ddcf45a3f3e8278c68dfa, type: 3}
   movement:
     runSpeed: 9
-    inAirControlAcceleration: 1
-    gravity: 70
+    inAirControlAcceleration: 10
+    gravity: 20
     maxFallSpeed: 25
     speedSmoothing: 0
   jump:
     enabled: 1
-    height: .5
-    extraHeightTime: .00999999978
-    currentExtraHeightTime: 0
+    height: 40
+    doubleJumpHeight: 10
+    doubleJumped: 0
   throwback:
     throwBackStrength: 25
     feedbackStrength: 18

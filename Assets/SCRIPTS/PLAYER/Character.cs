@@ -68,10 +68,18 @@ public class Character : MonoBehaviour
  
         // How high do we jump when pressing jump and letting go immediately
         public float height = 1.0f;
-        // We add extraHeight units (meters) on top when holding the button down longer while jumping
-        public float extraHeightTime = 0.5f;
+ 
+        public float doubleJumpHeight = 2.1f;
+ 
+        // Are where double jumping? ( Initiated when jumping or falling after pressing the jump button )
+        [System.NonSerialized]
+        public bool doubleJumping = false;
+ 
+        // Can we make a double jump ( we can't make two double jump or more at the same jump )
+        [System.NonSerialized]
+        public bool canDoubleJump = false;
 
-        public float currentExtraHeightTime = 0.0f;
+        public bool doubleJumped = false;
  
         // This prevents inordinarily too quick jumping
         // The next line, @System.NonSerialized , tells Unity to not serialize the variable or show it in the inspector view.  Very handy for organization!
@@ -228,11 +236,7 @@ public class Character : MonoBehaviour
  
     protected virtual void ApplyJumping()
     {
-        // Prevent jumping too fast after each other
-        if (jump.lastTime + jump.repeatTime > Time.time)
-            return;
- 
-        if (controller.isGrounded)
+        if (controller.isGrounded || (jump.doubleJumping && !jump.doubleJumped))
         {
             // Jump
             // - Only when pressing the button down
@@ -264,14 +268,20 @@ public class Character : MonoBehaviour
 
 			this.GetComponent<PlayerAnimater>().SetPlayerFlying();
         }
+
         // * When jumping up we don't apply gravity for some time when the user is holding the jump button
         //   This gives more control over jump height by pressing the button longer
-        bool extraPowerJump = jump.jumping && jumpButton && jump.currentExtraHeightTime < jump.extraHeightTime && !IsTouchingCeiling();
+        bool extraPowerJump = jump.jumping && jump.doubleJumping && !jump.doubleJumped && movement.verticalSpeed > 0.0 && jumpButton && !IsTouchingCeiling();
  
         if (extraPowerJump)
+        {
             return;
+        }
         else if (controller.isGrounded)
+        {
             movement.verticalSpeed = -movement.gravity * Time.deltaTime;
+            jump.canDoubleJump = false;
+        }
         else
             movement.verticalSpeed -= movement.gravity * Time.deltaTime;
  
@@ -293,20 +303,32 @@ public class Character : MonoBehaviour
         jump.lastTime = Time.time;
         jump.lastStartHeight = transform.position.y;
         jump.lastButtonTime = -10;
-        jump.currentExtraHeightTime = 0.0f;
         SetState(CharacterStates.Jump);
     }
 
     protected virtual void CharacterUpdate()
     {
-    	if (playerController.jumping && canControl)
+        bool jumpButton = playerController.jumping;
+        // if we are jumping and we press jump button, we do a double jump or
+        // if we are falling, we can do a double jump to
+        if ((jump.jumping && jumpButton && !jump.doubleJumping) || (!controller.isGrounded && !jump.jumping && !jump.doubleJumping && movement.verticalSpeed < -12.0))
+        {
+            jump.canDoubleJump = true;
+        }
+ 
+        // if we can do a double jump, and we press the jump button, we do a double jump
+        if (jump.canDoubleJump && jumpButton && !IsTouchingCeiling())
+        {
+            jump.doubleJumping = true;
+            movement.verticalSpeed = CalculateJumpVerticalSpeed(jump.doubleJumpHeight);
+            jump.canDoubleJump = false;
+ 
+        }
+    	if (jumpButton && canControl)
         {
             jump.lastButtonTime = Time.time;
             jump.lastStartHeight = transform.position.y;
         }
-
-        if(jump.currentExtraHeightTime < jump.extraHeightTime)
-        jump.currentExtraHeightTime += Time.deltaTime;
  
         UpdateSmoothedMovementDirection();
  
@@ -368,9 +390,12 @@ public class Character : MonoBehaviour
         {
             movement.inAirVelocity = Vector3.zero;
  
-            if (jump.jumping)
+            if (jump.jumping || jump.doubleJumping)
             {
                 jump.jumping = false;
+                jump.doubleJumping = false;
+                jump.canDoubleJump = false;
+                jump.doubleJumped = false;
  
                 SendMessage("DidLand", SendMessageOptions.DontRequireReceiver);
 
@@ -383,6 +408,9 @@ public class Character : MonoBehaviour
         }
 
         throwback.currentThrowback *= throwback.throwbackDeaccelerationValue;
+
+        if(jump.doubleJumping)
+            jump.doubleJumped = true;
     }
  
     protected virtual void Update()
