@@ -57,6 +57,7 @@ public class Game : MonoBehaviour
 		character.GetComponent<PlayerController>().Init(playerID);
 		character.GetComponent<Character>().Spawn(spawnPosition);
 		character.name = charName;
+		character.tag = charName;
 		character.layer = LayerMask.NameToLayer(charName);
 	}
 }

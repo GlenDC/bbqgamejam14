@@ -94,17 +94,19 @@ public class Character : MonoBehaviour
  
     public PlatformerControllerMovement movement;
  
- 	PlayerController playerController; // input controller
+ 	protected PlayerController playerController; // input controller
  
     public PlatformerControllerJumping jump;
  
-    private CharacterController controller;
+    protected CharacterController controller;
  
     // Moving platform support.
     protected Transform activePlatform;
     protected Vector3 activeLocalPlatformPoint;
     protected Vector3 activeGlobalPlatformPoint;
     protected Vector3 lastPlatformVelocity;
+
+    protected EPlayerID playerID;
 
     protected virtual void CharacterAwake()
     {
@@ -115,9 +117,26 @@ public class Character : MonoBehaviour
         playerController = GetComponent<PlayerController>();
     }
  
-    void Awake()
+    protected virtual void Awake()
     {
     	CharacterAwake();
+    }
+
+    public void SetPlayerID(EPlayerID id)
+    {
+        playerID = id;
+    }
+
+    protected GameObject GetEnemy()
+    {
+        if(playerID == EPlayerID.PlayerOne)
+        {
+            return GameObject.FindWithTag("PLAYER_TWO");
+        }
+        else
+        {
+            return GameObject.FindWithTag("PLAYER_ONE");
+        }
     }
  
     public void Spawn(Vector3 position)
@@ -364,6 +383,16 @@ public class Character : MonoBehaviour
     protected virtual void SetControllable(bool controllable)
     {
         canControl = controllable;
+    }
+
+    public virtual void onAttacked()
+    {
+        Debug.Log("Kill!");
+    }
+
+    public virtual void onFeedback()
+    {
+        Debug.Log("Shouldn't happen!");
     }
 }
  
