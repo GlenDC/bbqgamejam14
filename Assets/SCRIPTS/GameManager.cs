@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
 	private GameObject pauseMenu;
+	private GameObject gameOverMenu;
 
 	// Use this for initialization
 	void Start () {
 		pauseMenu = GameObject.Find("PauseMenu");
-		pauseMenu.SetActive (false);
+		gameOverMenu = GameObject.Find("GameOverMenu");
+		pauseMenu.SetActive(false);
+		gameOverMenu.SetActive(false);
 	}
 	
 	// Update is called once per frame
