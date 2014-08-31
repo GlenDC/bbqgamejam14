@@ -46,12 +46,16 @@ public class PlayerController : MonoBehaviour {
 	void UpdatePlayerOne () {
 		if (Input.GetAxis("p1Horizontal") < -0.8){
 			goingLeft = true;
+			this.GetComponent<PlayerAnimater>().SetAnimationDirection(true,false);
+			this.GetComponent<PlayerAnimater>().SetPlayerRunning();
 		} else {
 			goingLeft = false;
 		}
 		
 		if (Input.GetAxis("p1Horizontal") > 0.8){
 			goingRight = true;
+			this.GetComponent<PlayerAnimater>().SetAnimationDirection(false,true);
+			this.GetComponent<PlayerAnimater>().SetPlayerRunning();
 		} else {
 			goingRight = false;
 		}
@@ -66,12 +70,16 @@ public class PlayerController : MonoBehaviour {
 	void UpdatePlayerTwo () {
 		if (Input.GetAxis("p2Horizontal") < -0.8){
 			goingLeft = true;
+			this.GetComponent<PlayerAnimater>().SetAnimationDirection(true,false);
+			this.GetComponent<PlayerAnimater>().SetPlayerRunning();
 		} else {
 			goingLeft = false;
 		}
 		
 		if (Input.GetAxis("p2Horizontal") > 0.8){
 			goingRight = true;
+			this.GetComponent<PlayerAnimater>().SetAnimationDirection(false,true);
+			this.GetComponent<PlayerAnimater>().SetPlayerRunning();
 		} else {
 			goingRight = false;
 		}
