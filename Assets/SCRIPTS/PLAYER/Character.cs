@@ -202,7 +202,8 @@ public class Character : MonoBehaviour
  
     void FixedUpdate()
     {
-    	CharacterFixedUpdate();
+        if(!GameManager.IsPaused)
+    	   CharacterFixedUpdate();
     }
  
     protected virtual void ApplyJumping()
@@ -359,7 +360,8 @@ public class Character : MonoBehaviour
  
     protected virtual void Update()
     {
-        CharacterUpdate();
+        if(!GameManager.IsPaused)
+            CharacterUpdate();
     }
  
     void OnControllerColliderHit(ControllerColliderHit hit)

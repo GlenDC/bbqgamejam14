@@ -21,5 +21,6 @@ public class ButtonResume : MonoBehaviour {
 
 	void OnClick(){
 		pauseMenu.SetActive(false);
+		GameManager.IsPaused = false;
 	}
 }
