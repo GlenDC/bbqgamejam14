@@ -15,7 +15,7 @@ public class LoaderManagerScript : MonoBehaviour {
 		TileMaterialArray = new Material[7];
 
 	[ SerializeField ] Sprite[]
-		GroundSpriteArray = new Sprite[9];
+		GroundSpriteArray = new Sprite[18];
 
 	GameObject[]
 		StartTileArray = new GameObject[2];
@@ -115,7 +115,7 @@ public class LoaderManagerScript : MonoBehaviour {
 
 				tile_value -= 1;
 
-				if (tile_value >= 0 && tile_value < 9){
+				if (tile_value >= 0 && tile_value < 18){
 
 					Vector3 ground_tile_position = this.transform.position;
 
