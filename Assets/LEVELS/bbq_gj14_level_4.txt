@@ -778,7 +778,7 @@
    <tile gid="5"/>
   </data>
  </layer>
- <objectgroup name="Start" width="32" height="24" visible="0">
+ <objectgroup name="Start" width="32" height="24">
   <object name="BlueStart" type="blue_start" x="1728" y="704" width="64" height="64">
    <properties>
     <property name="sub_type" value="blue"/>
