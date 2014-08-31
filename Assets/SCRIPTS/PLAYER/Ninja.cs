@@ -101,10 +101,12 @@ public class Ninja : Character
     protected override void OnCharacterAttack()
     {
         audioSource.PlayOneShot(AttackSounds[rnd.Next(0, AttackSounds.Length)]);
+		this.GetComponent<PlayerAnimater>().SetPlayerAttacking();
     }
 
     protected override void OnCharacterBlock()
     {
         audioSource.PlayOneShot(BlockSound);
+		this.GetComponent<PlayerAnimater>().SetPlayerBlocking();
     }
 }

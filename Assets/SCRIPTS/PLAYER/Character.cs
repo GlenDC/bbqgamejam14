@@ -402,9 +402,9 @@ public class Character : MonoBehaviour
         {
             activePlatform = hit.collider.transform;
 
-			if (this.GetComponent<PlayerAnimater>().GetInAir()){
+			if (!this.GetComponent<PlayerAnimater>().GetInAir()){
 
-				this.GetComponent<PlayerAnimater>().SetPlayerStanding();
+				//this.GetComponent<PlayerAnimater>().SetPlayerStanding();
 			}
         }
     }
@@ -498,23 +498,24 @@ public class Character : MonoBehaviour
 
     protected virtual void OnCharacterAttack()
     {
-        
-    }
+
+	}
 
     protected virtual void OnCharacterJump()
     {
         audioSource.PlayOneShot(JumpSound);
         this.GetComponent<PlayerAnimater>().SetPlayerJumping();
+		Debug.Log ("character jumping");
     }
 
     protected virtual void OnCharacterBlock()
     {
-        
+
     }
 
     protected virtual void OnCharacterRun()
     {
-        
+
     }
 
     protected virtual void OnCharacterGround()
@@ -535,8 +536,8 @@ public class Character : MonoBehaviour
 
                 case CharacterStates.Attack:
                     if(characterState != CharacterStates.Block)
-                        characterState = newState;
-                    OnCharacterAttack();
+						OnCharacterAttack();
+						characterState = newState;
                     break;
 
                 case CharacterStates.Jump:

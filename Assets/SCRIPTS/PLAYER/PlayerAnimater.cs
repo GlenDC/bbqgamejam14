@@ -168,6 +168,8 @@ public class PlayerAnimater : MonoBehaviour {
 
 		if(AttackAnimation)
 		{
+			Debug.Log ("player attacking");
+
 			AttackAnimation.renderer.enabled = true;
 
 			StandingAnimation.renderer.enabled = false;
