@@ -153,19 +153,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canControl: 1
   movement:
-    runSpeed: 10
+    runSpeed: 8
     inAirControlAcceleration: 1
-    gravity: 60
-    maxFallSpeed: 20
-    speedSmoothing: 20
+    gravity: 70
+    maxFallSpeed: 25
+    speedSmoothing: 25
   jump:
     enabled: 1
-    height: 1
-    extraHeight: 4.0999999
+    height: .5
+    extraHeight: .25
+  throwback:
+    throwBackStrength: 10
+    feedbackStrength: 2
+    throwbackDeaccelerationValue: .949999988
+    currentThrowback: {x: 0, y: 0, z: 0}
   meshRenderer: {fileID: 2300000}
   rangeChecker: {fileID: 11400004}
   normal: {fileID: 2100000, guid: 3e84ed166dae7f64282236e2fd23fa81, type: 2}
   inRange: {fileID: 2100000, guid: b1f9a687568a09146ac7631b8210ef05, type: 2}
+  attackedInBetweenDelay: .5
+  feedbackInBetweenDelay: .5
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
