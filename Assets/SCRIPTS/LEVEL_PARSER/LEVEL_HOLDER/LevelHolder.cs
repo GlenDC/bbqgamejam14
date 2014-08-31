@@ -7,7 +7,7 @@ public class LevelHolder : MonoBehaviour {
 		NinjaWarpTimer;
 
 	GameObject[]
-		GroundTileArray = new GameObject[300];
+		GroundTileArray = new GameObject[500];
 
 	GameObject[]
 		StartTileArray = new GameObject[2];

@@ -21,7 +21,7 @@ public class LoaderManagerScript : MonoBehaviour {
 		StartTileArray = new GameObject[2];
 
 	GameObject[]
-		GroundTileArray = new GameObject[300];
+		GroundTileArray = new GameObject[500];
 
 	GameObject
 		StartDoorObject,
@@ -69,12 +69,9 @@ public class LoaderManagerScript : MonoBehaviour {
 		GameObject level_holder = Instantiate(LevelHolderPrefab,Vector3.zero,Quaternion.identity) as GameObject;
 		level_holder.name = "level_holder";
 
-		GameObject[] ground_tile_array = new GameObject[300];
+		GameObject[] ground_tile_array = new GameObject[500];
 
 		GameObject[] start_tile_array = new GameObject[2];
-
-		//GameObject blue_start_object = new GameObject();
-		//GameObject red_start_object = new GameObject();
 
 		GameObject[] warp_tile_array = new GameObject[20];
 
