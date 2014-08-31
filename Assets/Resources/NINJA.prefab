@@ -161,7 +161,8 @@ MonoBehaviour:
   jump:
     enabled: 1
     height: .5
-    extraHeight: .25
+    extraHeightTime: .200000003
+    currentExtraHeightTime: 0
   throwback:
     throwBackStrength: 10
     feedbackStrength: 2

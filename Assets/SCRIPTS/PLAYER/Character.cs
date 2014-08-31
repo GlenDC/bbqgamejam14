@@ -60,7 +60,9 @@ public class Character : MonoBehaviour
         // How high do we jump when pressing jump and letting go immediately
         public float height = 1.0f;
         // We add extraHeight units (meters) on top when holding the button down longer while jumping
-        public float extraHeight = 4.1f;
+        public float extraHeightTime = 0.5f;
+
+        public float currentExtraHeightTime = 0.0f;
  
         // This prevents inordinarily too quick jumping
         // The next line, @System.NonSerialized , tells Unity to not serialize the variable or show it in the inspector view.  Very handy for organization!
@@ -236,7 +238,7 @@ public class Character : MonoBehaviour
         }
         // * When jumping up we don't apply gravity for some time when the user is holding the jump button
         //   This gives more control over jump height by pressing the button longer
-        bool extraPowerJump = jump.jumping && movement.verticalSpeed > 0.0 && jumpButton && transform.position.y < jump.lastStartHeight + jump.extraHeight && !IsTouchingCeiling();
+        bool extraPowerJump = jump.jumping && jumpButton && jump.currentExtraHeightTime < jump.extraHeightTime && !IsTouchingCeiling();
  
         if (extraPowerJump)
             return;
@@ -263,6 +265,7 @@ public class Character : MonoBehaviour
         jump.lastTime = Time.time;
         jump.lastStartHeight = transform.position.y;
         jump.lastButtonTime = -10;
+        jump.currentExtraHeightTime = 0.0f;
     }
 
     protected virtual void CharacterUpdate()
@@ -270,7 +273,11 @@ public class Character : MonoBehaviour
     	if (playerController.jumping && canControl)
         {
             jump.lastButtonTime = Time.time;
+            jump.lastStartHeight = transform.position.y;
         }
+
+        if(jump.currentExtraHeightTime < jump.extraHeightTime)
+        jump.currentExtraHeightTime += Time.deltaTime;
  
         UpdateSmoothedMovementDirection();
  
