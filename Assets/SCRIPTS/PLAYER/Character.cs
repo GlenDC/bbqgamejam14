@@ -224,6 +224,8 @@ public class Character : MonoBehaviour
                 movement.verticalSpeed = CalculateJumpVerticalSpeed(jump.height);
                 movement.inAirVelocity = lastPlatformVelocity;
                 SendMessage("DidJump", SendMessageOptions.DontRequireReceiver);
+
+				//this.GetComponent<PlayerAnimater>().SetPlayerJumping(true,false);
             }
         }
     }
@@ -241,6 +243,8 @@ public class Character : MonoBehaviour
         {
             jump.reachedApex = true;
             SendMessage("DidJumpReachApex", SendMessageOptions.DontRequireReceiver);
+
+			this.GetComponent<PlayerAnimater>().SetPlayerFlying();
         }
         // * When jumping up we don't apply gravity for some time when the user is holding the jump button
         //   This gives more control over jump height by pressing the button longer
@@ -272,6 +276,8 @@ public class Character : MonoBehaviour
         jump.lastStartHeight = transform.position.y;
         jump.lastButtonTime = -10;
         jump.currentExtraHeightTime = 0.0f;
+
+		this.GetComponent<PlayerAnimater>().SetPlayerJumping();
     }
 
     protected virtual void CharacterUpdate()
@@ -376,6 +382,11 @@ public class Character : MonoBehaviour
         if (hit.moveDirection.y < -0.9f && hit.normal.y > 0.9f)
         {
             activePlatform = hit.collider.transform;
+
+			if (this.GetComponent<PlayerAnimater>().GetInAir()){
+
+				this.GetComponent<PlayerAnimater>().SetPlayerStanding();
+			}
         }
     }
  
@@ -418,7 +429,9 @@ public class Character : MonoBehaviour
 
     public virtual void onAttacked(Vector3 dir)
     {
-        Debug.Log("Kill!");
+		this.GetComponent<PlayerAnimater>().SetPlayerBlocking();
+
+		Debug.Log("Kill!");
     }
 
     public virtual void onFeedback(Vector3 dir)
