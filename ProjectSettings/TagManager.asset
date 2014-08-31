@@ -10,6 +10,7 @@ TagManager:
   - SAUSAGE_WARP
   - NINJA_WARP
   - LEVEL_HOLDER
+  - GameOverMenu
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

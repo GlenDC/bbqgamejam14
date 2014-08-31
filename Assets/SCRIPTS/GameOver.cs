@@ -7,17 +7,16 @@ public class GameOver : MonoBehaviour {
 	private int winnerID;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		gameOverTitle = GameObject.Find("GameOverTitle").GetComponent<Text>();
 		//TEMP/////////////////////////
 		winnerID = 1;
 		gameOverTitle.text = "PLAYER " + "X" + " WINS";
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.anyKey){
-			Application.LoadLevel("menu");
-		}
+
+	public void SetWinner(int id)
+	{
+		winnerID = id;
+		gameOverTitle.text = "PLAYER " + winnerID + " WINS";
 	}
 }

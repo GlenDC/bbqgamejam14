@@ -31,4 +31,11 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 	}
+
+	public void OnEndGame(int winnerID)
+	{
+		gameOverMenu.SetActive(true);
+		gameOverMenu.GetComponent<GameOver>().SetWinner(winnerID);
+		IsPaused = true;
+	}
 }

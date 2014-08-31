@@ -13,10 +13,13 @@ public class Game : MonoBehaviour
 	Transform spawnOne, spawnTwo;
 
 	public LevelManagerScript levelManager;
+	GameManager gameManager;
 
 	void Start()
 	{
 		levelManager.LaunchLevelBuilding(PlayerSettings.playerLevel);
+
+		gameManager = GetComponent<GameManager>();
 
 		spawnOne = GameObject.FindWithTag("SPAWN_ONE").transform;
 		spawnTwo = GameObject.FindWithTag("SPAWN_TWO").transform;
@@ -60,6 +63,7 @@ public class Game : MonoBehaviour
 		charaterScript.Spawn(spawnPosition);
 		charaterScript.SetPlayerID(playerID);
 		charaterScript.game = this;
+		charaterScript.gameManager = gameManager;
 
 		if(playerID == EPlayerID.PlayerOne)
 		{

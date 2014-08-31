@@ -113,6 +113,8 @@ public class Character : MonoBehaviour
     public PlatformerControllerJumping jump;
 
     public PlayerThrowback throwback;
+
+    public GameManager gameManager;
  
     protected CharacterController controller;
  
@@ -418,7 +420,7 @@ public class Character : MonoBehaviour
 
     public virtual void onAttacked(Vector3 dir)
     {
-        Debug.Log("Kill!");
+        gameManager.OnEndGame(playerID == EPlayerID.PlayerOne ? 1 : 2);
     }
 
     public virtual void onFeedback(Vector3 dir)
