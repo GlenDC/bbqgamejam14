@@ -278,7 +278,14 @@ public class Character : MonoBehaviour
  
         if (jump.doubleJumped && jump.currentTime < jump.doubleJumpTime)
         {
-            return;
+            if(IsTouchingCeiling())
+            {
+                jump.currentTime = jump.doubleJumpTime;
+            }
+            else
+            {
+                return;
+            }
         }
         else if (controller.isGrounded)
         {
